@@ -15,12 +15,11 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-
 /**
  * Created by efrat on 22/11/16.
  */
 public class RDF {
-    public static Model LoadModel(String filePath)
+    public static Model loadModel(String filePath)
     {
         Model model = ModelFactory.createDefaultModel();
         // Use the FileManager to find the input file
@@ -35,13 +34,13 @@ public class RDF {
         return model;
     }
 
-    public static Model LoadModel(String modelString, String format)
+    public static Model loadModel(String modelString, String format)
     {
 
         File file = new File("temp."+format);
         try {
             Files.write(modelString, file, Charsets.UTF_8);
-            return LoadModel("temp."+format);
+            return loadModel("temp."+format);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -84,6 +83,7 @@ public class RDF {
         return null;
 
     }
+
 
 
 

@@ -1,0 +1,2 @@
+ <http://localhost/publications/articles/Journal1/1940/Article1>  a                     <http://localhost/vocabulary/bench/Article> ;
+              <http://swrc.ontoware.org/ontology#pages>             110.

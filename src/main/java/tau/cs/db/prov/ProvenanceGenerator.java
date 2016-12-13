@@ -7,6 +7,7 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.engine.binding.Binding;
+import org.apache.jena.sparql.syntax.Element;
 import tau.cs.db.utils.RDF;
 
 import java.util.ArrayList;
@@ -104,8 +105,31 @@ public class ProvenanceGenerator {
  //       provModel.read(new ByteArrayInputStream(stringModel.getBytes()), "TURTLE");
         //provModel.read(is,"TURTLE");
 
-        return RDF.LoadModel(stringModel,"ttl");
+        return RDF.loadModel(stringModel,"ttl");
 
+    }
+
+    public static boolean ExecuteAskQuery(Query askQuery, Model model,QuerySolution binding) {
+
+
+        QueryExecution qExec = QueryExecutionFactory.create(askQuery, model,binding);
+
+        return qExec.execAsk();
+
+
+    }
+    public static Query CreatAskQuery(Query query){
+
+        Element elm = query.getQueryPattern();
+
+
+        Query askQuery = QueryFactory.create("ASK {<s> <p> <o>}");
+
+        askQuery.setQueryPattern(query.getQueryPattern());
+        askQuery.setQueryAskType();
+
+
+        return askQuery;
     }
 
 }
