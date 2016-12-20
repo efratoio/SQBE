@@ -22,10 +22,13 @@ public class QbpPattern {
             }
         }
 
-        this.IR = new Float(varsNum)/pattern.size()*2;
+        this.IR = new Float(varsNum)/(pattern.getList().size()*2);
     }
 
-
+    @Override
+    public String toString() {
+        return this.pattern.toString();
+    }
 
     public Float GetIR(){
         return  this.IR;

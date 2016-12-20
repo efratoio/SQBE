@@ -1,20 +1,18 @@
 package tau.cs.db;
 
-import tau.cs.db.qbp.utils;
-import org.apache.jena.query.Query;
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.sparql.core.BasicPattern;
-import org.apache.jena.sparql.util.NodeIsomorphismMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tau.cs.db.utils.BBLearner;
+import tau.cs.db.qbp.QbpExplanation;
+import tau.cs.db.qbp.QbpLearner;
+import tau.cs.db.qbp.QbpPattern;
 import tau.cs.db.utils.Experiment;
 import tau.cs.db.utils.RDF;
-import tau.cs.db.utils.sparqlbyeLearner;
 
-import java.util.Collection;
-import java.util.Iterator;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 
 /**
@@ -29,6 +27,65 @@ public class App
      * @return the model loaded
      */
 
+    public static  void RunExperiment(Model model,String queryName,int k){
+
+        Experiment.CreateExperiment(queryName,model,k);
+//       Experiment.CreateSets("q8",model);
+        List<QbpExplanation> res = Experiment.LoadSets(queryName);
+        TreeMap<QbpPattern,Set<QbpExplanation>> matching = QbpLearner.ComputeMatching(res);
+
+        File provFile = new File(String.format("./files/examples/%s/run.txt", queryName));
+        if(!provFile.exists()){
+            try{
+                provFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        try(FileWriter fileWriter = new FileWriter(provFile)) {
+            for(Map.Entry<QbpPattern,Set<QbpExplanation>> e: matching.entrySet()){
+                fileWriter.write(e.getKey().toString());
+                fileWriter.write(String.format("\nIR: %f\n",e.getKey().GetIR()));
+                fileWriter.write("\n\n---------------------------\n");
+                for(QbpExplanation exp : e.getValue()){
+                    fileWriter.write(exp.toString());
+                    fileWriter.write("\n\n\n");
+                }
+                fileWriter.write("\n\n\n#################################################\n\n\n");
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        File resultsFile = new File(String.format("./files/examples/%s/resulst.txt", queryName));
+        if(!resultsFile.exists()){
+            try{
+                resultsFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        try(FileWriter fileWriter = new FileWriter(resultsFile)) {
+
+            for(QbpPattern patt : matching.keySet()){
+                fileWriter.write(patt.toString());
+                fileWriter.write(String.format("\n\nIR %f\n\n", patt.GetIR()));
+
+                fileWriter.write("\n\n\n#################################################\n\n\n");
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main( String[] args )
     {
@@ -44,40 +101,44 @@ public class App
 //
 //
         Model model = RDF.loadModel("/home/efrat/Documents/SQBE/files/ontology/sp2b.n3");
+//
 
-        boolean b = Experiment.CheackExample("q8",1,model);
-        logger.info(String.format("%b",b));
-//        Experiment.MakeExamples("q8",model,8);
+        RunExperiment(model,"q8",8);
 
 //
+//        Experiment.CreateExperiment("q6",model,20);
+//        List<QbpExplanation> res = Experiment.LoadSets("q6");
+//        TreeMap<QbpPattern,Set<QbpExplanation>>  matching = QbpLearner.ComputeMatching(res);
 //
-//        Model model = RDF.loadModel("/home/efrat/Documents/SQBE/files/examples/q3a/mod.ttl");
-//        Model pattern = RDF.loadModel("/home/efrat/Documents/SQBE/files/examples/q3a/pat.ttl");
-//
-//
-//
-//        BasicPattern p1 = new BasicPattern();
-//        Iterator<Statement> stItr = model.listStatements();
-//
-//        while(stItr.hasNext()){
-//            Statement stmnt = stItr.next();
-//            p1.add(stmnt.asTriple());
-//
+//        File provFile = new File("./files/examples/q6/run.txt");
+//        if(!provFile.exists()){
+//            try{
+//                provFile.createNewFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 //        }
 //
-//        BasicPattern p2 = new BasicPattern();
-//        Iterator<Statement> stItr2 = pattern.listStatements();
 //
-//        while(stItr2.hasNext()){
-//            Statement stmnt = stItr2.next();
-//            p2.add(stmnt.asTriple());
+//        try(FileWriter fileWriter = new FileWriter(provFile)) {
+//            for(Map.Entry<QbpPattern,Set<QbpExplanation>> e: matching.entrySet()){
+//                fileWriter.write(e.getKey().toString());
+//                fileWriter.write(String.format("\nIR: %f\n",e.getKey().GetIR()));
+//                fileWriter.write("\n\n---------------------------\n");
+//                for(QbpExplanation exp : e.getValue()){
+//                    fileWriter.write(exp.toString());
+//                    fileWriter.write("\n\n\n");
+//                }
+//                fileWriter.write("\n\n\n#################################################\n\n\n");
+//            }
 //
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
 //        }
-//
-//        BasicPattern m = tau.cs.db.qbp.utils.FindBestMerge(p1,p2);
-//
-//      //  logger.info(lables.toString());
-//
+
+        logger.info("hi");
+
 //
 //
 ////        String content = null;

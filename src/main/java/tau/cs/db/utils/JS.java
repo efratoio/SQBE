@@ -36,11 +36,13 @@ public class JS {
 
             JSONObject jo= new JSONObject();
             jo.put("var",varName);
-            jo.put("value",example.toString());
             if(example.isLiteral()) {
+
+                jo.put("value",example.getLiteral().toString());
                 jo.put("type","Literal");
             }
             else {
+                jo.put("value",example.toString());
                 jo.put("type","URI");
             }
             exapmles.add(jo);
@@ -62,6 +64,13 @@ public class JS {
             ex.printStackTrace();
         }
 
+    }
+
+    public static ResultSet JS2ResultSet(String examplePath){
+
+
+        InputStream in = FileManager.get().open(examplePath);
+        return ResultSetFactory.fromJSON(in);
     }
 
     public static ResultSet JS2ResultSet(String queryName,int exampleNum){

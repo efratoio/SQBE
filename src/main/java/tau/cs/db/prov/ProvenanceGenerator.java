@@ -7,7 +7,6 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.engine.binding.Binding;
-import org.apache.jena.sparql.syntax.Element;
 import tau.cs.db.utils.RDF;
 
 import java.util.ArrayList;
@@ -94,6 +93,14 @@ public class ProvenanceGenerator {
         if(m.find()) {
             stringModel = m.group(1);
         }
+
+        pattern  = "\\{(.*?)\\}";
+        r = Pattern.compile(pattern,Pattern.DOTALL);
+        m = r.matcher(stringModel);
+        if(m.find()) {
+            stringModel = m.group(1);
+        }
+
         StringBuilder stringModelBuilder = new StringBuilder(stringModel);
 
         stringModelBuilder.insert(stringModelBuilder.lastIndexOf("\n"),".");
@@ -112,16 +119,32 @@ public class ProvenanceGenerator {
     public static boolean ExecuteAskQuery(Query askQuery, Model model,QuerySolution binding) {
 
 
-        QueryExecution qExec = QueryExecutionFactory.create(askQuery, model,binding);
+        QuerySolutionMap qsm = new QuerySolutionMap();
+        qsm.add(binding.varNames().next(),binding.get(binding.varNames().next()));
+        QueryExecution qExec = QueryExecutionFactory.create(askQuery, model,qsm);
+
 
         return qExec.execAsk();
 
 
     }
-    public static Query CreatAskQuery(Query query){
+    public static Query CreatAskQuery(Query query,QuerySolution binding){
 
-        Element elm = query.getQueryPattern();
-
+//
+//
+//        ParameterizedSparqlString pss = new ParameterizedSparqlString();
+//        pss.setCommandText(query.toString());
+//
+//        String varName = binding.varNames().next();
+//
+////
+////        if(binding.get(varName).isLiteral()){
+////            pss.setLiteral(varName,binding.getLiteral(varName));
+////        }else{
+////            pss.setIri(varName,binding.getResource(varName).toString());
+////        }
+//
+//        Query tmp = QueryFactory.create(pss.toString());
 
         Query askQuery = QueryFactory.create("ASK {<s> <p> <o>}");
 

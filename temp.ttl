@@ -1,3 +1,6 @@
- <http://localhost/publications/articles/Journal1/1940/Article1>  a                     <http://localhost/vocabulary/bench/Article> ;
-              <http://swrc.ontoware.org/ontology#pages>             110.
+ <http://localhost/persons/Paul_Erdoes>   a                     <http://xmlns.com/foaf/0.1/Person> ;
+              <http://xmlns.com/foaf/0.1/name>  "Paul Erdoes" .
+    <http://localhost/publications/inprocs/Proceeding1/1950/Inproceeding7>  <http://purl.org/dc/elements/1.1/creator>  <http://localhost/persons/Paul_Erdoes> ;
+              <http://purl.org/dc/elements/1.1/creator>  <http://localhost/persons/Jazmine_Susman> .
+    <http://localhost/persons/Jazmine_Susman>   <http://xmlns.com/foaf/0.1/name>  "Jazmine Susman".
     
