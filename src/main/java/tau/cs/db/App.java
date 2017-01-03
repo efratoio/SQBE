@@ -1,5 +1,6 @@
 package tau.cs.db;
 
+import org.apache.jena.query.Query;
 import org.apache.jena.rdf.model.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,59 +33,68 @@ public class App
         Experiment.CreateExperiment(queryName,model,k);
 //       Experiment.CreateSets("q8",model);
         List<QbpExplanation> res = Experiment.LoadSets(queryName);
-        TreeMap<QbpPattern,Set<QbpExplanation>> matching = QbpLearner.ComputeMatching(res);
-
-        File provFile = new File(String.format("./files/examples/%s/run.txt", queryName));
+//        TreeMap<QbpPattern,Set<QbpExplanation>> matching = QbpLearner.ComputeMatching(res);
+        Query q = QbpLearner.unifyBest(res);
+        File provFile = new File(String.format("./files/examples/%s/query.txt", queryName));
         if(!provFile.exists()){
             try{
                 provFile.createNewFile();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
-
         try(FileWriter fileWriter = new FileWriter(provFile)) {
-            for(Map.Entry<QbpPattern,Set<QbpExplanation>> e: matching.entrySet()){
-                fileWriter.write(e.getKey().toString());
-                fileWriter.write(String.format("\nIR: %f\n",e.getKey().GetIR()));
-                fileWriter.write("\n\n---------------------------\n");
-                for(QbpExplanation exp : e.getValue()){
-                    fileWriter.write(exp.toString());
-                    fileWriter.write("\n\n\n");
-                }
-                fileWriter.write("\n\n\n#################################################\n\n\n");
-            }
+            fileWriter.write(q.toString());
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+//
 
-
-        File resultsFile = new File(String.format("./files/examples/%s/resulst.txt", queryName));
-        if(!resultsFile.exists()){
-            try{
-                resultsFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-        try(FileWriter fileWriter = new FileWriter(resultsFile)) {
-
-            for(QbpPattern patt : matching.keySet()){
-                fileWriter.write(patt.toString());
-                fileWriter.write(String.format("\n\nIR %f\n\n", patt.GetIR()));
-
-                fileWriter.write("\n\n\n#################################################\n\n\n");
-            }
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//
+//        try(FileWriter fileWriter = new FileWriter(provFile)) {
+//            for(Map.Entry<QbpPattern,Set<QbpExplanation>> e: matching.entrySet()){
+//                fileWriter.write(e.getKey().toString());
+//                fileWriter.write(String.format("\nIR: %f\n",e.getKey().GetIR()));
+//                fileWriter.write("\n\n---------------------------\n");
+//                for(QbpExplanation exp : e.getValue()){
+//                    fileWriter.write(exp.toString());
+//                    fileWriter.write("\n\n\n");
+//                }
+//                fileWriter.write("\n\n\n#################################################\n\n\n");
+//            }
+//
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        File resultsFile = new File(String.format("./files/examples/%s/resulst.txt", queryName));
+//        if(!resultsFile.exists()){
+//            try{
+//                resultsFile.createNewFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//
+//        try(FileWriter fileWriter = new FileWriter(resultsFile)) {
+//
+//            for(QbpPattern patt : matching.keySet()){
+//                fileWriter.write(patt.toString());
+//                fileWriter.write(String.format("\n\nIR %f\n\n", patt.GetIR()));
+//
+//                fileWriter.write("\n\n\n#################################################\n\n\n");
+//            }
+//
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public static void main( String[] args )

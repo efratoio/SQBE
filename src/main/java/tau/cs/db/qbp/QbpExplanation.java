@@ -6,13 +6,14 @@ import org.apache.jena.graph.Triple;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.sparql.core.BasicPattern;
+import org.apache.jena.sparql.syntax.ElementPathBlock;
 
 import java.util.Iterator;
 
 /**
  * Created by efrat on 10/12/16.
  */
-public class QbpExplanation {
+public class QbpExplanation implements Mergeable, Patternable{
     BasicPattern explanation;
     Node example;
 
@@ -81,6 +82,35 @@ public class QbpExplanation {
     }
 
     public QbpPattern MergeExplanations(QbpExplanation other) {
-        return new QbpPattern(utils.FindBestMerge(this.explanation, other.explanation));
+        TripleMerger tm = new TripleMerger(new ElementPathBlock(this.explanation).getPattern().getList(),
+                new ElementPathBlock(other.explanation).getPattern().getList());
+        ElementPathBlock patt = tm.merge();
+        if(patt == null){
+            return  null;
+        }
+        else{
+            return new QbpPattern(patt);
+        }
+    }
+
+
+
+
+    @Override
+    public QbpPattern merge(Patternable t) {
+        TripleMerger tm = new TripleMerger(new ElementPathBlock(this.explanation).getPattern().getList(),
+                t.getPattern().getPattern().getList());
+        ElementPathBlock patt = tm.merge();
+        if(patt == null){
+            return  null;
+        }
+        else{
+            return new QbpPattern(patt);
+        }
+    }
+
+    @Override
+    public ElementPathBlock getPattern() {
+        return new ElementPathBlock(this.explanation);
     }
 }

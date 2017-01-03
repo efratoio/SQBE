@@ -13,6 +13,7 @@ import org.apache.jena.sparql.core.BasicPattern;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.engine.binding.Binding;
 import org.apache.jena.sparql.engine.binding.BindingFactory;
+import org.apache.jena.sparql.sse.SSE;
 import org.apache.jena.util.FileManager;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -39,8 +40,23 @@ public class RDF {
         return result;
     }
 
-    public static BasicPattern file2BasicpatternWithVars(String filePath) {
 
+    public static BasicPattern bgp(String str)
+    {
+        String s1 = "(prefix ((: <http://example/>)) " ;
+        String s2 = ")" ;
+        return SSE.parseBGP(s1+str+s2) ;
+    }
+
+    public static BasicPattern file2BasicpatternWithVars(String filePath) {
+//        try {
+//            String s = Files.toString(new File(filePath),Charsets.UTF_8);
+//
+//            return bgp(s);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
         BasicPattern result = new BasicPattern();
         try {
             for (String line : Files.readLines(new File(filePath),Charsets.UTF_8)) {

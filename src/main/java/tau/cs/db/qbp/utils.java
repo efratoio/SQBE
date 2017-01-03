@@ -4,14 +4,24 @@ import org.apache.jena.atlas.lib.Pair;
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Node_Variable;
 import org.apache.jena.graph.Triple;
+import org.apache.jena.sparql.algebra.Op;
+import org.apache.jena.sparql.algebra.op.OpBGP;
+import org.apache.jena.sparql.algebra.op.OpPath;
+import org.apache.jena.sparql.algebra.op.OpSequence;
 import org.apache.jena.sparql.core.BasicPattern;
+import org.apache.jena.sparql.core.PathBlock;
+import org.apache.jena.sparql.core.TriplePath;
+import org.apache.jena.sparql.path.Path;
+import org.apache.jena.sparql.path.PathFactory;
+import org.apache.jena.sparql.syntax.ElementPathBlock;
+import org.jgrapht.DirectedGraph;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.alg.ConnectivityInspector;
+import org.jgrapht.alg.CycleDetector;
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleDirectedGraph;
 import org.jgrapht.graph.SimpleGraph;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import tau.cs.db.App;
+import org.jgrapht.traverse.TopologicalOrderIterator;
 
 import java.util.*;
 
@@ -20,6 +30,24 @@ import java.util.*;
  */
 public class utils {
 
+
+    public static int varsCount(ElementPathBlock pattern){
+        int varsNum = 0;
+
+        for(TriplePath triple : pattern.getPattern().getList()){
+            if(triple.getSubject().isVariable()){
+                varsNum++;
+            }
+            if(triple.getPredicate()!=null && triple.getPredicate().isVariable()){
+                varsNum++;
+            }
+            if(triple.getObject().isVariable()){
+                varsNum++;
+            }
+        }
+        return varsNum;
+
+    }
 
 
     public static <T> List<List<T>> permute(List<T> arr, int k, List<List<T>> res){
@@ -38,29 +66,46 @@ public class utils {
         return res;
     }
 
-    public static boolean isBgpIsomorphic(BasicPattern p1, BasicPattern p2){
+    public static boolean isBgpIsomorphic(ElementPathBlock p1, ElementPathBlock p2){
+        if(p1 == null || p2 == null){
+            return false;
+        }
+        if(p1.equals(p2)){
+            return true;
+        }
         Set<Node_Variable> variablesSet1 = new HashSet<Node_Variable>();
         Set<Node_Variable> variableSet2 = new HashSet<Node_Variable>();
 
-        Comparator<Triple> cmp = new Comparator<Triple>() {
+        Comparator<TriplePath> cmp = new Comparator<TriplePath>() {
             @Override
-            public int compare(Triple node, Triple other) {
-                if(node.getSubject().toString().compareTo(other.getSubject().toString())==0){
-                    if(node.getPredicate().toString().compareTo(other.getPredicate().toString())==0){
-                        return node.getPredicate().toString().compareTo(other.getPredicate().toString());
-                    }else{
-                        return node.getObject().toString().compareTo(other.getObject().toString());
+            public int compare(TriplePath node, TriplePath other) {
+                if (node.getSubject().toString().compareTo(other.getSubject().toString()) == 0) {
+                    if (node.isTriple() && other.isTriple()) {
+                        if (node.getPredicate().toString().compareTo(other.getPredicate().toString()) == 0) {
+                            return node.getObject().toString().compareTo(other.getObject().toString());
+                        } else {
+                            return node.getPredicate().toString().compareTo(other.getPredicate().toString());
+                        }
+                    } else {
+                        if (!node.isTriple() && !node.isTriple()) {
+                            if (node.getPath().toString().compareTo(other.getPath().toString()) == 0) {
+                                return node.getObject().toString().compareTo(other.getObject().toString());
+                            }
+                        } else {
+                            return -1;
+                        }
                     }
-                }else{
-                    return node.getSubject().toString().compareTo(other.getSubject().toString());
                 }
+
+                return node.getSubject().toString().compareTo(other.getSubject().toString());
             }
+
         };
-        SortedSet<Triple> l1 = new TreeSet<Triple>(cmp);
-        l1.addAll(p1.getList());
+        SortedSet<TriplePath> l1 = new TreeSet<TriplePath>(cmp);
+        l1.addAll(p1.getPattern().getList());
 
 
-        for(Triple t1: p1){
+        for(TriplePath t1: p1.getPattern()){
             Node s = t1.getSubject();
             Node p = t1.getPredicate();
             Node o = t1.getObject();
@@ -74,7 +119,7 @@ public class utils {
                 variablesSet1.add((Node_Variable) o);
             }
         }
-        for(Triple t2: p2){
+        for(TriplePath t2: p2.getPattern()){
             Node s = t2.getSubject();
             Node p = t2.getPredicate();
             Node o = t2.getObject();
@@ -90,7 +135,6 @@ public class utils {
         }
         if(variableSet2.size()!=variablesSet1.size())
             return false;
-        SortedSet<Triple> l2 = new TreeSet<Triple>(cmp);
 //        l2.addAll(p2.getList());
 
 //        Map<String,Node> nodeList = new HashMap<String,Node>();
@@ -99,31 +143,33 @@ public class utils {
 //        if(variablesSet1.size()!=variableSet2.size()){
 //            return false;
 //        }
-        if(variablesSet1.size()==0)
+        if(variablesSet1.size()==0) {
             return true;
+        }
 
         List<Node_Variable> lst1 = new ArrayList<Node_Variable>(variablesSet1);
         List<Node_Variable> lst2 = new ArrayList<Node_Variable>(variableSet2);
 //
         for(List<Node_Variable> perm : utils.<Node_Variable>permute(lst1,0,null)){
-            for(Triple t : p2){
+            SortedSet<TriplePath> l2 = new TreeSet<TriplePath>(cmp);
+            for(TriplePath t : p2.getPattern()){
                 Node[] nodes=new Node[3];
                 if(t.getSubject().isVariable()){
-                    nodes[0]=lst1.get(lst2.indexOf(t.getSubject()));
+                    nodes[0]=perm.get(lst2.indexOf(t.getSubject()));
                 }else{
                     nodes[0] = t.getSubject();
                 }
                 if(t.getPredicate().isVariable()){
-                    nodes[0]=lst1.get(lst2.indexOf(t.getPredicate()));
+                    nodes[1]=perm.get(lst2.indexOf(t.getPredicate()));
                 }else{
-                    nodes[0] = t.getPredicate();
+                    nodes[1] = t.getPredicate();
                 }
                 if(t.getObject().isVariable()){
-                    nodes[0]=lst1.get(lst2.indexOf(t.getObject()));
+                    nodes[2]=perm.get(lst2.indexOf(t.getObject()));
                 }else{
-                    nodes[0] = t.getObject();
+                    nodes[2] = t.getObject();
                 }
-
+                l2.add(new TriplePath(nodes[0],PathFactory.pathLink(nodes[1]),nodes[2]));
             }
             if(equiv(l1,l2,cmp))
                 return true;
@@ -180,21 +226,67 @@ public class utils {
         return new Pair<Integer,Integer>(m_i,m_j);
     }
 
-    public  static  BasicPattern CreateMergedPattern(ArrayList<Pair<Triple,Triple>> matching){
 
-        BasicPattern result = new BasicPattern();
+    public  static ElementPathBlock createMergedPattern(List<Pair<TriplePath,TriplePath>> matching){
+
+        ElementPathBlock result = new ElementPathBlock();
 
         Iterator<String> var_itr = (new Alphabet('a','z')).iterator();
 
         Map<Node,Set<String>> var1 = new HashMap<Node,Set<String>>();
         Map<Node,Set<String>> var2 = new HashMap<Node,Set<String>>();
 
+        Map<Pair<TriplePath,Boolean>,Set<TriplePath>> clustered = new HashMap<>();
 
 
-        for(Pair<Triple,Triple> match : matching){
+        for(Pair<TriplePath,TriplePath> pair : matching){
+            Set<TriplePath> s1= clustered.getOrDefault(new Pair<TriplePath,Boolean>(pair.getLeft(),false),new HashSet<TriplePath>());
+            s1.add(pair.getRight());
+            clustered.put(new Pair<TriplePath,Boolean>(pair.getLeft(),false),s1);
+            Set<TriplePath> s2= clustered.getOrDefault(new Pair<TriplePath,Boolean>(pair.getRight(),true),new HashSet<TriplePath>());
+            s2.add(pair.getLeft());
+            clustered.put(new Pair<TriplePath,Boolean>(pair.getRight(),true),s2);
+        }
+
+
+        for(Map.Entry<Pair<TriplePath,Boolean>,Set<TriplePath>> entry : clustered.entrySet()){
+            if(entry.getValue().size()>1){
+                if(testConnectivity(entry.getValue())){
+                    Path path = PathFactory.pathOneOrMore1(PathFactory
+                            .pathAlt(PathFactory.pathLink(entry.getKey().getLeft().getPredicate()),
+                                    PathFactory.pathInverse(
+                                            PathFactory.pathLink(entry.getKey().getLeft().getPredicate()))));
+
+                    result.addTriplePath(new TriplePath(entry.getKey().getLeft().getSubject(),
+                            path,entry.getKey().getLeft().getObject()));
+
+//                    Pair<Node,Node>  source_sink = t
+
+
+
+                }
+                if(entry.getKey().getRight()) {
+                    for (TriplePath t :
+                            entry.getValue()) {
+                        matching.remove(new Pair<TriplePath, TriplePath>(t, entry.getKey().getLeft()));
+                    }
+                }else {
+                    for (TriplePath t :
+                            entry.getValue()) {
+                        matching.remove(new Pair<TriplePath, TriplePath>(entry.getKey().getLeft(),t));
+                    }
+                }
+
+            }
+        }
+
+
+
+        for(Pair<TriplePath,TriplePath> match : matching){
             Node sub = null;
             Node obj =null;
             Node pred = null;
+
 
 
             if(match.getLeft().getSubject().matches(match.getRight().getSubject())) {
@@ -255,20 +347,28 @@ public class utils {
                 pred = new Node_Variable(var_itr.next());
             }
 
-            result.add(new Triple(sub,pred,obj));
+            result.addTriple(new Triple(sub,pred,obj));
         }
 
         return result;
     }
 
-    /***
+
+
+    private static boolean testConnectivity(Set<TriplePath> value) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	/***
      * Tests if there is a connetion between exam[le to other nodes
      * @param pattern
      * @return
      */
-    public static boolean testBasicPatten(BasicPattern pattern){
+    public static boolean testBasicPatten(ElementPathBlock pattern){
         UndirectedGraph<String,DefaultEdge> graph = new SimpleGraph<String,DefaultEdge>(DefaultEdge.class);
-        for (Triple triple : pattern){
+        for (TriplePath triple : pattern.getPattern()){
             graph.addVertex(triple.getSubject().toString());
             graph.addVertex(triple.getObject().toString());
             graph.addEdge(triple.getSubject().toString(),triple.getObject().toString());
@@ -278,13 +378,88 @@ public class utils {
         return CI.isGraphConnected();
     }
 
-    private static boolean testBoolArr(Boolean[] arr){
+    public static DirectedGraph<String,DefaultEdge> makeGraph(Set<TriplePath> pattern){
+        DirectedGraph<String,DefaultEdge> graph = new SimpleDirectedGraph<String, DefaultEdge>(DefaultEdge.class);
+        for (TriplePath triple : pattern){
+            graph.addVertex(triple.getSubject().toString());
+            graph.addVertex(triple.getObject().toString());
+            graph.addEdge(triple.getSubject().toString(),triple.getObject().toString());
+        }
+        return graph;
+    }
+    public static boolean testConnectivityAndNoCycles(Set<TriplePath> pattern){
+
+        DirectedGraph<String,DefaultEdge> graph = makeGraph(pattern);
+        ConnectivityInspector<String,DefaultEdge> CI = new ConnectivityInspector<String, DefaultEdge>(graph);
+        if(!CI.isGraphConnected())
+            return false;
+
+        CycleDetector<String,DefaultEdge> cd = new CycleDetector<>(graph);
+        return !cd.detectCycles();
+    }
+
+    /**
+     * For graphs with no cycles
+     * @param pattern
+     * @return
+     */
+    public static Pair<Node,Node> getSourceSink(Set<TriplePath> pattern){
+        DirectedGraph<String,DefaultEdge> graph = makeGraph(pattern);
+        TopologicalOrderIterator<String,DefaultEdge> it = new TopologicalOrderIterator<String, DefaultEdge>(graph);
+        return null;
+    }
+
+    public static boolean getIsPath(Triple source ,Set<Triple> pattern){
+        DirectedGraph<String,DefaultEdge> graph = new SimpleDirectedGraph<String, DefaultEdge>(DefaultEdge.class);
+        for (Triple triple : pattern){
+            graph.addVertex(triple.getSubject().toString());
+            graph.addVertex(triple.getObject().toString());
+            graph.addEdge(triple.getSubject().toString(),triple.getObject().toString());
+        }
+
+
+        ConnectivityInspector<String,DefaultEdge> CI = new ConnectivityInspector<String, DefaultEdge>(graph);
+        if(!CI.isGraphConnected())
+            return false;
+
+        boolean s =false;
+        boolean o = false;
+        for (Triple triple : pattern){
+            if(graph.inDegreeOf(triple.getSubject().toString())==0 &&
+                    graph.outDegreeOf(triple.getSubject().toString())==1){
+                if(source.getSubject().toString().compareTo(triple.getSubject().toString())==0){
+                    s=true;
+                }
+
+            }
+            if(graph.outDegreeOf(triple.getObject().toString())==0 &&
+                    graph.inDegreeOf(triple.getObject().toString())==1){
+                if(source.getObject().toString().compareTo(triple.getObject().toString())==0){
+                    o=true;
+                }
+
+            }
+        }
+        return true;
+    }
+
+    public static boolean testBoolArr(Boolean[] arr){
         return Arrays.stream(arr).reduce(true,(a,b)->Boolean.logicalAnd(a,b));
     }
 
-    public static BasicPattern FindMergeHandler(List<Triple> l1, List<Triple> l2, float[][] weightMatchMatrix,
+    public static int countFalse(Boolean[] arr){
+        int res = 0;
+        for (Boolean b : arr){
+            if(!b)
+                res++;
+        }
+        return res;
+    }
+
+
+    public static ElementPathBlock FindMergeHandler(List<TriplePath> l1, List<TriplePath> l2, float[][] weightMatchMatrix,
                                                 Boolean[] mark1, Boolean[] mark2 ,
-                                                ArrayList<Pair<Triple,Triple>> matching,
+                                                ArrayList<Pair<TriplePath,TriplePath>> matching,
                                                 PriorityQueue<Pair<Integer,Integer>> minimalQueue){
         if(minimalQueue==null) {
             minimalQueue = new PriorityQueue<Pair<Integer, Integer>>(new Comparator<Pair<Integer, Integer>>() {
@@ -311,50 +486,50 @@ public class utils {
             Boolean m1Old = mark1[arg_min.getLeft()];
             Boolean m2Old = mark2[arg_min.getRight()];
             weightMatchMatrix[arg_min.getLeft()][arg_min.getRight()] =1;
-            if(!mark1[arg_min.getLeft()] || !mark2[arg_min.getLeft()]) {
-                matching.add(new Pair<Triple,Triple>(l1.get(arg_min.getLeft()),l2.get(arg_min.getRight())));
+            if(!mark1[arg_min.getLeft()] || !mark2[arg_min.getRight()]) {
+                matching.add(new Pair<TriplePath,TriplePath>(l1.get(arg_min.getLeft()),l2.get(arg_min.getRight())));
                 mark1[arg_min.getLeft()]=true;
-                mark2[arg_min.getLeft()] = true;
+                mark2[arg_min.getRight()] = true;
 
                 for(int i=0;i<l1.size();i++){
                     for(int j=0;j<l2.size();j++){
-                        if(l1.get(i).subjectMatches(l2.get(j).getSubject())){
+                        if(l1.get(i).getSubject().matches(l2.get(j).getSubject())){
                             weightMatchMatrix[i][j] /=2;
                         }
-                        if(l1.get(i).objectMatches(l2.get(j).getObject())){
+                        if(l1.get(i).getObject().matches(l2.get(j).getObject())){
                             weightMatchMatrix[i][j] /=2;
                         }
                     }
                 }
             }
 
-            BasicPattern p = FindMergeHandler(l1,l2,weightMatchMatrix,mark1,mark2,matching,minimalQueue);
+            ElementPathBlock p = FindMergeHandler(l1,l2,weightMatchMatrix,mark1,mark2,matching,minimalQueue);
             if(p!=null){
                 return p;
             }
 
             if(!m1Old || ! m2Old){
-                matching.remove(new Pair<Triple,Triple>(l1.get(arg_min.getLeft()),l2.get(arg_min.getRight())));
+                matching.remove(new Pair<TriplePath,TriplePath>(l1.get(arg_min.getLeft()),l2.get(arg_min.getRight())));
                 mark1[arg_min.getLeft()]=m1Old;
                 mark2[arg_min.getRight()]=m2Old;
             }
             for(int i=0;i<l1.size();i++){
                 for(int j=0;j<l2.size();j++){
-                    if(l1.get(i).subjectMatches(l2.get(j).getSubject())){
+                    if(l1.get(i).getSubject().matches(l2.get(j).getSubject())){
                         weightMatchMatrix[i][j] *=2;
                     }
-                    if(l1.get(i).objectMatches(l2.get(j).getObject())){
+                    if(l1.get(i).getObject().matches(l2.get(j).getObject())){
                         weightMatchMatrix[i][j] *=2;
                     }
                 }
             }
 
-            minimalQueue.add(arg_min);
+//            minimalQueue.add(arg_min);
             weightMatchMatrix[arg_min.getLeft()][arg_min.getRight()] = oldVal;
         }
 
         if(testBoolArr(mark1) && testBoolArr(mark2)){
-            BasicPattern p = CreateMergedPattern(matching);
+            ElementPathBlock p = createMergedPattern(matching);
             if(p!=null && testBasicPatten(p)){
                 return p;
             }
@@ -368,12 +543,50 @@ public class utils {
 
     }
 
+    static private Op flush(BasicPattern bp, Op op)
+    {
+        if ( bp == null || bp.isEmpty() )
+            return op ;
 
-    public static BasicPattern FindBestMerge(BasicPattern p1, BasicPattern p2) {
+        OpBGP opBGP = new OpBGP(bp) ;
+        op = OpSequence.create(op, opBGP) ;
+        return op ;
+    }
+
+    /** Convert any paths of exactly one predicate to a triple pattern */
+    public static Op pathToTriples(PathBlock pattern)
+    {
+        BasicPattern bp = null ;
+        Op op = null ;
+
+        for ( TriplePath tp : pattern )
+        {
+            if ( tp.isTriple() )
+            {
+                if ( bp == null )
+                    bp = new BasicPattern() ;
+                bp.add(tp.asTriple()) ;
+                continue ;
+            }
+            // Path form.
+            op = flush(bp, op) ;
+            bp = null ;
+
+            OpPath opPath2 = new OpPath(tp) ;
+            op = OpSequence.create(op, opPath2) ;
+            continue ;
+        }
+
+        // End.  Finish off any outstanding BGP.
+        op = flush(bp, op) ;
+        return op ;
+    }
+/*
+    public static ElementPathBlock FindBestMerge(ElementPathBlock p1, ElementPathBlock p2) {
 
         Logger logger = LoggerFactory.getLogger(App.class);
-        List<Triple> l1 = p1.getList();
-        List<Triple> l2 = p2.getList();
+        List<TriplePath> l1 = p1.getPattern().getList();
+        List<TriplePath> l2 = p2.getPattern().getList();
 
 
         HashMap<Node,Integer> P2 = new HashMap<Node, Integer>();
@@ -395,7 +608,7 @@ public class utils {
 
         HashMap<Node,Integer> edge2Triple_p2 = new HashMap<Node, Integer>();
 
-        for (Triple triple : l2){
+        for (TriplePath triple : l2){
             Integer count = edge2Triple_p2.getOrDefault(triple.getPredicate(),0);
             edge2Triple_p2.put(triple.getPredicate(),count+1);
 
@@ -441,10 +654,10 @@ public class utils {
 
 
 
-        BasicPattern p= FindMergeHandler(l1,l2,weightMatchMatrix,mark1,mark2,matching,null);
+        ElementPathBlock p= FindMergeHandler(l1,l2,weightMatchMatrix,mark1,mark2,matching,null);
 
         return p;
 
 
-    }
+    }*/
 }
