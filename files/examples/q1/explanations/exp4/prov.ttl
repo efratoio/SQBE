@@ -1,0 +1,3 @@
+<http://A> <http://P> <http://B>
+<http://A> <http://P> <http://G>
+<http://A> <http://P> <http://D>
