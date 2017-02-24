@@ -1,194 +1,201 @@
 package tau.cs.db.qbp;
 
-import org.apache.commons.math3.util.CombinatoricsUtils;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
+import com.google.common.primitives.Floats;
+import org.apache.jena.atlas.lib.Pair;
 import org.apache.jena.query.Query;
 import org.apache.jena.sparql.algebra.Op;
 import org.apache.jena.sparql.algebra.OpAsQuery;
-import org.apache.jena.sparql.algebra.op.OpBGP;
-import org.apache.jena.sparql.algebra.op.OpPath;
+import org.apache.jena.sparql.algebra.op.OpProject;
 import org.apache.jena.sparql.algebra.op.OpUnion;
-import org.apache.jena.sparql.core.BasicPattern;
-import org.apache.jena.sparql.core.PathBlock;
-import org.apache.jena.sparql.core.TriplePath;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.jena.sparql.core.Var;
 
 import java.util.*;
+
 /**
  * Created by efrat on 12/12/16.
  */
 public class QbpLearner {
 
-    static float W1=5;
-    static float W2=20;
-
-
-    public static TreeMap<QbpPattern,Set<QbpPattern>> ComputeMatchingPatterns(List<QbpPattern> patterns){
-        if(patterns.size()<2){
-            return new TreeMap<QbpPattern,Set<QbpPattern>>();
+    public static float W1=100;
+    public static float W2=10;
+    public static  Comparator<QbpQuerySuggestion> cmp = new Comparator<QbpQuerySuggestion>() {
+        @Override
+        public int compare(QbpQuerySuggestion qbpSets, QbpQuerySuggestion t1) {
+            return Floats.compare(computeCost(qbpSets),computeCost(t1));
         }
-        TreeMap<QbpPattern,Set<QbpPattern>> matching = new TreeMap<>(new Comparator<QbpPattern>() {
-            @Override
-            public int compare(QbpPattern qbpPattern, QbpPattern t1) {
-                if(utils.isBgpIsomorphic(qbpPattern.pattern,t1.pattern)){
-                    return 0;
-                }
-                return -1;
-            }
-
-        });
-        if(patterns.size()==2){
-            QbpPattern m_p = patterns.get(0).mergePattern(patterns.get(1));
-            if(m_p!=null) {
-                Set<QbpPattern> hs = new HashSet<QbpPattern>();
-                hs.addAll(patterns);
-                matching.put(m_p, hs);
-            }
-            return matching;
+    };
+    Map<Set<Integer>,QbpSet> mergeSuggMap;
+    List<QbpSet> basicPatterns;
+    public QbpLearner(List<? extends QbpBasicExplanation> explanations) throws InvalidPropertiesFormatException {
+        this.basicPatterns = new ArrayList<>();
+        for(QbpBasicExplanation exp: explanations){
+            this.basicPatterns.add(new QbpSet(new QbpPattern(new QbpPattern(exp))
+                    ,Arrays.asList(exp)));
         }
-        Iterator<int[]> itr = CombinatoricsUtils.combinationsIterator(patterns.size()-1,2);
-
-        while(itr.hasNext()){
-            int[] indices = itr.next();
-                QbpPattern pattern = patterns.get(indices[0]).mergePattern(patterns.get(indices[1]));
-                if(pattern!=null) {
-                    if (!matching.containsKey(pattern)) {
-                        Set<QbpPattern> hs = new HashSet<QbpPattern>();
-                        matching.put(pattern, hs);
-                    }
-
-                    matching.get(pattern).add(patterns.get(indices[0]));
-                    matching.get(pattern).add(patterns.get(indices[1]));
-                }
-        }
-        for(QbpPattern patt : matching.keySet()){
-            for(QbpPattern exp: patterns){
-                if(utils.isBgpIsomorphic(exp.merge(patt).getPattern(),patt.getPattern())){
-                    matching.get(patt).add(exp);
-                }
-            }
-        }
-        return matching;
+        this.mergeSuggMap = new HashMap<>();
+        this.InitSuggestions();
     }
 
-    public static float computeCost(int explanations,List<QbpPattern> pats){
+    public void InitSuggestions() throws InvalidPropertiesFormatException {
+        for(int i=0; i<this.basicPatterns.size();i++) {
+            for (int j = i + 1; j < this.basicPatterns.size(); j++) {
+                QbpSet res = this.basicPatterns.get(i).mergeSets(this.basicPatterns.get(j));
+                if (res != null) {
+                    this.mergeSuggMap.put(CreateSetInt(i,j), res);
+                }
+            }
+
+        }
+    }
+
+    public static float computeCost(List<Pair<QbpSet,Set<Integer>>> pats){
         float sum_IR=0;
-        for(QbpPattern p: pats){
-            sum_IR+=p.GetIR();
+        for(Pair<QbpSet,Set<Integer>> p: pats){
+            sum_IR+=p.getLeft().GetIR();
         }
-        return W2*explanations+W2*pats.size()+W1*sum_IR;
+        return W2*pats.size()+W1*sum_IR;
     }
-    public static Query unifyBest(List<QbpExplanation> explanations){
-        List<QbpPattern> bgp2Union = new ArrayList<QbpPattern>();
-        float currCost = explanations.size()*W2;
-        float newCost = currCost;
-        do{
-            currCost=newCost;
 
-            TreeMap<QbpPattern,Set<QbpExplanation>> matching = ComputeMatching(explanations);
-//            TreeMap<QbpPattern,Set<QbpPattern>> patMatching = ComputeMatchingPatterns(bgp2Union);
-            Set<QbpExplanation> exp = new HashSet<QbpExplanation>(explanations);
-            QbpPattern pat=null;
-            for(Map.Entry<QbpPattern,Set<QbpExplanation>> entry: matching.entrySet()){
-                Set<QbpExplanation> rexp = new HashSet<QbpExplanation>(entry.getValue());
-                rexp.retainAll(exp);
 
-                List<QbpPattern> pats = new ArrayList<QbpPattern>(bgp2Union);
-                pats.add(entry.getKey());
-                float cost = computeCost(exp.size()-rexp.size(),pats);
-                if(cost<newCost){
-                    newCost=cost;
-                    pat = entry.getKey();
-                }
 
-            }
-
-//            for(Map.Entry<QbpPattern,Set<QbpPattern>> entry : patMatching.entrySet()){
-//                float cost=currCost;
-//                for (QbpPattern patt : entry.getValue()){
-//                    cost-=patt.GetIR()*W1 -W2;
-//                }
-//                cost+=W2+entry.getKey().GetIR();
-//                if(cost<newCost){
-//                    newCost=cost;
-//                    pat = entry.getKey();
-//                }
-//            }
-            if(currCost>newCost && pat!=null){
-                bgp2Union.add(pat);
-                if(matching.containsKey(pat)) {
-                    Set<QbpExplanation> h = new HashSet<QbpExplanation>(explanations);
-                    h.retainAll(matching.get(pat));
-                    explanations.removeAll(h);
-                    matching.remove(pat);
-                }
-            }
-        }while(currCost>newCost);
+    public static Query CreateQuery(List<Pair<QbpSet,Set<Integer>>> lst){
         Op opQuery =null;
-        for(QbpPattern patt : bgp2Union){
+        for(Pair<QbpSet,Set<Integer>> patt : lst){
             if(opQuery == null){
-                opQuery = utils.pathToTriples(patt.pattern.getPattern());
+                opQuery = utils.queryBuilder(patt.getLeft());
             }
             else{
-                Op op = utils.pathToTriples(patt.pattern.getPattern());
+                Op op = utils.queryBuilder(patt.getLeft());
                 opQuery = OpUnion.create(opQuery,op);
             }
         }
 
+        opQuery = new OpProject(opQuery, Arrays.asList(Var.alloc("example")));
         return OpAsQuery.asQuery(opQuery);
 
     }
 
+    public static Collection<QbpQuerySuggestion> GetKQueries(NavigableSet<QbpQuerySuggestion> qbpSetSuggestion,int k,
+                                                 QbpLearner learner) throws InvalidPropertiesFormatException {
 
 
-    public static TreeMap<QbpPattern,Set<QbpExplanation>> ComputeMatching(List<QbpExplanation> explanations){
-        Logger logger = LoggerFactory.getLogger(QbpLearner.class);
-//        Set<Node> nodes = new HashSet<>();
-//        explanations.stream().map(qbpExplanation -> nodes.add(qbpExplanation.getExample()));
-        TreeMap<QbpPattern,Set<QbpExplanation>> matching = new TreeMap<>(new Comparator<QbpPattern>() {
-            @Override
-            public int compare(QbpPattern qbpPattern, QbpPattern t1) {
-                if(utils.isBgpIsomorphic(qbpPattern.pattern,t1.pattern)){
-                    return 0;
-                }
-                return -1;
-            }
+        NavigableSet<QbpQuerySuggestion> newSuggestions  = new TreeSet<>(cmp);
+        for(QbpQuerySuggestion qbpSetList: qbpSetSuggestion){
+            PriorityQueue<Pair<QbpSet,Set<Integer>>> queue = CreateSuggestion(qbpSetList,learner);
+            for(int i=0;i<k;i++ ){
+                if(queue.size()>0) {
+                    QbpQuerySuggestion sug = new QbpQuerySuggestion();
 
-        });
-        Iterator<int[]> itr = CombinatoricsUtils.combinationsIterator(explanations.size()-1,2);
+                    Pair<QbpSet, Set<Integer>> mergeSugg = queue.poll();
+                    for (Pair<QbpSet, Set<Integer>> pair : qbpSetList) {
 
-        while(itr.hasNext()){
-            int[] indices = itr.next();
-            if(0!=explanations.get(indices[0]).getExample().toString().compareTo(explanations.get(indices[1]).getExample().toString())) {
-                QbpPattern pattern = explanations.get(indices[0]).MergeExplanations(explanations.get(indices[1]));
-                if(pattern!=null) {
-                    if (!matching.containsKey(pattern)) {
-                        Set<QbpExplanation> hs = new HashSet<QbpExplanation>();
-                        matching.put(pattern, hs);
+
+                        if (!mergeSugg.getRight().containsAll(pair.getRight())) {
+                            if(mergeSugg.getLeft().checkAddToSet(pair.getLeft())){
+                                mergeSugg.getLeft().addToSet(pair.getLeft());
+                                List<Integer> newList = new LinkedList<Integer>();
+                                mergeSugg = new Pair<>(mergeSugg.getLeft(), Sets.union(mergeSugg.getRight(),
+                                        pair.getRight()));
+
+
+                            }
+                            else {
+                                sug.add(pair);
+                            }
+
+                        }
                     }
 
-                    matching.get(pattern).add(explanations.get(indices[0]));
-                    matching.get(pattern).add(explanations.get(indices[1]));
+                    sug.add(mergeSugg);
+                    newSuggestions.add(sug);
 
                 }
             }
         }
-//        for(QbpPattern patt : matching.keySet()){
-//            for(QbpExplanation exp: explanations){
-//                QbpPattern mer_p = exp.merge(patt);
-//
-//                if(mer_p!=null && utils.isBgpIsomorphic(mer_p.getPattern(),patt.getPattern())){
-//                    matching.get(patt).add(exp);
-//                }
-//            }
-//        }
-        return matching;
-    }
+//        qbpSetSuggestion.sort(cmp);
+//        newSuggestions.sort(cmp);
+        if(newSuggestions.size() ==0 || qbpSetSuggestion.containsAll(newSuggestions) || computeCost(newSuggestions.first())>=
+                computeCost(Iterables.get(qbpSetSuggestion,Integer.min(k-1,qbpSetSuggestion.size()-1)))){
+             return  qbpSetSuggestion.headSet(Iterables.get(qbpSetSuggestion,Integer.min(k,qbpSetSuggestion.size()-1)));
+        }
+        qbpSetSuggestion.addAll(newSuggestions);
 
-    public static void LearnQuery(List<QbpExplanation> explanations){
+        return GetKQueries(qbpSetSuggestion.headSet(Iterables.get(qbpSetSuggestion,Integer.min(k,qbpSetSuggestion.size()-1)),true),k,learner);
+
 
 
     }
+    public static PriorityQueue<Pair<QbpSet,Set<Integer>>> CreateSuggestion(QbpQuerySuggestion qbpSet,
+            QbpLearner learner)    throws InvalidPropertiesFormatException {
+
+        PriorityQueue<Pair<QbpSet,Set<Integer>>> queue = new PriorityQueue<>(new Comparator<Pair<QbpSet, Set<Integer>>>() {
+            @Override
+            public int compare(Pair<QbpSet,Set<Integer>> qbpSetPairPair, Pair<QbpSet, Set<Integer>> t1) {
+                return qbpSetPairPair.getLeft().compareTo(t1.getLeft()) ;
+            }
+        });
+
+        for(int i=0; i<qbpSet.size();i++){
+            for(int j=i+1; j<qbpSet.size();j++){
+                Set<Integer> indices = Sets.union(qbpSet.get(i).getRight(),qbpSet.get(j).getRight());
+                QbpSet res = learner.mergeSuggMap.get(indices);
+                if(res==null){
+                    try {
+                        res = qbpSet.get(i).getLeft().mergeSets(qbpSet.get(j).getLeft());
+                        if(res!=null)
+                            learner.mergeSuggMap.put(Sets.union(qbpSet.get(i).getRight(),
+                                qbpSet.get(j).getRight() ),res);
+                    }
+                    catch(Exception e){
+                        res=null;
+                    }
+                }
+
+                if(res!=null){
+                queue.add(new Pair<QbpSet,Set<Integer>>(res, Sets.union(qbpSet.get(i).getRight(),
+                        qbpSet.get(j).getRight())));
+                }
+            }
+        }
+        return queue;
+    }
+    public static Set<Integer> CreateSetInt(int i){
+            Set<Integer> re = new HashSet<>();
+            re.add(i);
+            return re;
+    }
+    public static Set<Integer> CreateSetInt(int i,int j){
+        Set<Integer> re = CreateSetInt(i);
+        re.add(j);
+        return re;
+    }
+    public static List<Query> LearnQuery(List<? extends  QbpBasicExplanation> explanations, int k) throws InvalidPropertiesFormatException {
+        QbpLearner learner = new QbpLearner(explanations);
+
+        QbpQuerySuggestion qbpSetList = new QbpQuerySuggestion();
+            for(int i=0;i< explanations.size();i++){
+                qbpSetList.add(new Pair(new QbpSet(new QbpPattern(explanations.get(i))
+                        ,Arrays.asList(explanations.get(i))), CreateSetInt(i)));
+            }
+
+        PriorityQueue<Pair<QbpSet,Set<Integer>>> queue = CreateSuggestion(qbpSetList,learner);
+        NavigableSet<QbpQuerySuggestion> lll = new TreeSet<>(cmp);
+        lll.add(qbpSetList);
+
+        Collection<QbpQuerySuggestion> KSuggestions = GetKQueries(lll,k,learner);
+
+        List<Query> kQueries = new ArrayList<>();
+        for(QbpQuerySuggestion qbpS: KSuggestions){
+            kQueries.add(CreateQuery(qbpS));
+        }
+        return kQueries;
+
+
+    }
+
+
 
 
 }

@@ -1,6 +1,20 @@
- <http://localhost/persons/Paul_Erdoes>   a                     <http://xmlns.com/foaf/0.1/Person> ;
-              <http://xmlns.com/foaf/0.1/name>  "Paul Erdoes" .
-    <http://localhost/publications/inprocs/Proceeding1/1950/Inproceeding7>  <http://purl.org/dc/elements/1.1/creator>  <http://localhost/persons/Paul_Erdoes> ;
-              <http://purl.org/dc/elements/1.1/creator>  <http://localhost/persons/Jazmine_Susman> .
-    <http://localhost/persons/Jazmine_Susman>   <http://xmlns.com/foaf/0.1/name>  "Jazmine Susman".
-    
+(<http://localhost/vocabulary/bench/Incollection> rdfs:subClassOf <http://xmlns.com/foaf/0.1/Document>)
+(<http://localhost/publications/incolls/1946/Incollection1> rdf:type ?class)
+(<http://localhost/publications/incolls/1946/Incollection1> <http://purl.org/dc/terms/issued> ?yr)
+(<http://localhost/publications/incolls/1946/Incollection1> <http://purl.org/dc/elements/1.1/creator> ?author)
+(<http://localhost/persons/Isamu_Cokely> <http://xmlns.com/foaf/0.1/name> ?name)
+(<http://localhost/vocabulary/bench/Incollection> rdfs:subClassOf <http://xmlns.com/foaf/0.1/Document>)
+(<http://localhost/publications/incolls/1946/Incollection1> rdf:type ?class)
+(<http://localhost/publications/incolls/1946/Incollection1> <http://purl.org/dc/terms/issued> ?yr)
+(<http://localhost/publications/incolls/1946/Incollection1> <http://purl.org/dc/elements/1.1/creator> ?author)
+(<http://localhost/persons/Isamu_Cokely> <http://xmlns.com/foaf/0.1/name> ?name)
+(<http://localhost/vocabulary/bench/Incollection> rdfs:subClassOf <http://xmlns.com/foaf/0.1/Document>)
+(<http://localhost/publications/incolls/1946/Incollection1> rdf:type ?class)
+(<http://localhost/publications/incolls/1946/Incollection1> <http://purl.org/dc/terms/issued> ?yr)
+(<http://localhost/publications/incolls/1946/Incollection1> <http://purl.org/dc/elements/1.1/creator> ?author)
+(<http://localhost/persons/Isamu_Cokely> <http://xmlns.com/foaf/0.1/name> ?name)
+(<http://localhost/vocabulary/bench/Incollection> rdfs:subClassOf <http://xmlns.com/foaf/0.1/Document>)
+(<http://localhost/publications/incolls/1946/Incollection1> rdf:type ?class)
+(<http://localhost/publications/incolls/1946/Incollection1> <http://purl.org/dc/terms/issued> ?yr)
+(<http://localhost/publications/incolls/1946/Incollection1> <http://purl.org/dc/elements/1.1/creator> ?author).
+(<http://localhost/persons/Isamu_Cokely> <http://xmlns.com/foaf/0.1/name> ?name)

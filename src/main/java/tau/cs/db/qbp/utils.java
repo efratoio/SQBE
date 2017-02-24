@@ -1,26 +1,37 @@
 package tau.cs.db.qbp;
 
+import org.apache.commons.math3.analysis.function.Exp;
 import org.apache.jena.atlas.lib.Pair;
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Node_Variable;
 import org.apache.jena.graph.Triple;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.sparql.algebra.Op;
 import org.apache.jena.sparql.algebra.op.OpBGP;
+import org.apache.jena.sparql.algebra.op.OpFilter;
 import org.apache.jena.sparql.algebra.op.OpPath;
 import org.apache.jena.sparql.algebra.op.OpSequence;
 import org.apache.jena.sparql.core.BasicPattern;
 import org.apache.jena.sparql.core.PathBlock;
 import org.apache.jena.sparql.core.TriplePath;
+import org.apache.jena.sparql.expr.E_NotEquals;
+import org.apache.jena.sparql.expr.Expr;
+import org.apache.jena.sparql.expr.ExprList;
+import org.apache.jena.sparql.path.P_Link;
+import org.apache.jena.sparql.path.P_OneOrMore1;
 import org.apache.jena.sparql.path.Path;
 import org.apache.jena.sparql.path.PathFactory;
 import org.apache.jena.sparql.syntax.ElementPathBlock;
 import org.jgrapht.DirectedGraph;
+import org.jgrapht.GraphPath;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.alg.ConnectivityInspector;
 import org.jgrapht.alg.CycleDetector;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleDirectedGraph;
-import org.jgrapht.graph.SimpleGraph;
+import org.jgrapht.alg.KShortestPaths;
+import org.jgrapht.graph.*;
 import org.jgrapht.traverse.TopologicalOrderIterator;
 
 import java.util.*;
@@ -31,10 +42,10 @@ import java.util.*;
 public class utils {
 
 
-    public static int varsCount(ElementPathBlock pattern){
+    public static int varsCount(Filterable pattern){
         int varsNum = 0;
 
-        for(TriplePath triple : pattern.getPattern().getList()){
+        for(TriplePath triple : pattern.getPattern()){
             if(triple.getSubject().isVariable()){
                 varsNum++;
             }
@@ -66,7 +77,7 @@ public class utils {
         return res;
     }
 
-    public static boolean isBgpIsomorphic(ElementPathBlock p1, ElementPathBlock p2){
+    public static boolean isBgpIsomorphic(List<TriplePath> p1, List<TriplePath> p2){
         if(p1 == null || p2 == null){
             return false;
         }
@@ -75,6 +86,8 @@ public class utils {
         }
         Set<Node_Variable> variablesSet1 = new HashSet<Node_Variable>();
         Set<Node_Variable> variableSet2 = new HashSet<Node_Variable>();
+
+
 
         Comparator<TriplePath> cmp = new Comparator<TriplePath>() {
             @Override
@@ -102,31 +115,33 @@ public class utils {
 
         };
         SortedSet<TriplePath> l1 = new TreeSet<TriplePath>(cmp);
-        l1.addAll(p1.getPattern().getList());
+        l1.addAll(p1);
 
 
-        for(TriplePath t1: p1.getPattern()){
+        for(TriplePath t1: p1){
+
             Node s = t1.getSubject();
             Node p = t1.getPredicate();
             Node o = t1.getObject();
             if(s.isVariable()) {
                 variablesSet1.add((Node_Variable) s);
             }
-            if(p.isVariable()) {
+            if(t1.isTriple() && p.isVariable()) {
                 variablesSet1.add((Node_Variable) p);
             }
+
             if(o.isVariable()) {
                 variablesSet1.add((Node_Variable) o);
             }
         }
-        for(TriplePath t2: p2.getPattern()){
+        for(TriplePath t2: p2){
             Node s = t2.getSubject();
             Node p = t2.getPredicate();
             Node o = t2.getObject();
             if(s.isVariable()) {
                 variableSet2.add((Node_Variable) s);
             }
-            if(p.isVariable()) {
+            if(t2.isTriple() && p.isVariable()) {
                 variableSet2.add((Node_Variable)p);
             }
             if(o.isVariable()) {
@@ -150,26 +165,32 @@ public class utils {
         List<Node_Variable> lst1 = new ArrayList<Node_Variable>(variablesSet1);
         List<Node_Variable> lst2 = new ArrayList<Node_Variable>(variableSet2);
 //
-        for(List<Node_Variable> perm : utils.<Node_Variable>permute(lst1,0,null)){
+        for(List<Node_Variable> perm : utils.permute(lst1,0,null)){
             SortedSet<TriplePath> l2 = new TreeSet<TriplePath>(cmp);
-            for(TriplePath t : p2.getPattern()){
+            for(TriplePath t : p2){
                 Node[] nodes=new Node[3];
+                Path path=null;
                 if(t.getSubject().isVariable()){
                     nodes[0]=perm.get(lst2.indexOf(t.getSubject()));
                 }else{
                     nodes[0] = t.getSubject();
                 }
-                if(t.getPredicate().isVariable()){
-                    nodes[1]=perm.get(lst2.indexOf(t.getPredicate()));
+                if(t.isTriple() && t.getPredicate().isVariable()){
+                    path = PathFactory.pathLink(perm.get(lst2.indexOf(t.getPredicate())));
                 }else{
-                    nodes[1] = t.getPredicate();
+                    if(t.isTriple()) {
+                        path = PathFactory.pathLink(t.getPredicate());
+                    }
+                    else{
+                        path = t.getPath();
+                    }
                 }
                 if(t.getObject().isVariable()){
                     nodes[2]=perm.get(lst2.indexOf(t.getObject()));
                 }else{
                     nodes[2] = t.getObject();
                 }
-                l2.add(new TriplePath(nodes[0],PathFactory.pathLink(nodes[1]),nodes[2]));
+                l2.add(new TriplePath(nodes[0],path,nodes[2]));
             }
             if(equiv(l1,l2,cmp))
                 return true;
@@ -227,169 +248,136 @@ public class utils {
     }
 
 
-    public  static ElementPathBlock createMergedPattern(List<Pair<TriplePath,TriplePath>> matching){
-
-        ElementPathBlock result = new ElementPathBlock();
-
-        Iterator<String> var_itr = (new Alphabet('a','z')).iterator();
-
-        Map<Node,Set<String>> var1 = new HashMap<Node,Set<String>>();
-        Map<Node,Set<String>> var2 = new HashMap<Node,Set<String>>();
-
-        Map<Pair<TriplePath,Boolean>,Set<TriplePath>> clustered = new HashMap<>();
 
 
-        for(Pair<TriplePath,TriplePath> pair : matching){
-            Set<TriplePath> s1= clustered.getOrDefault(new Pair<TriplePath,Boolean>(pair.getLeft(),false),new HashSet<TriplePath>());
-            s1.add(pair.getRight());
-            clustered.put(new Pair<TriplePath,Boolean>(pair.getLeft(),false),s1);
-            Set<TriplePath> s2= clustered.getOrDefault(new Pair<TriplePath,Boolean>(pair.getRight(),true),new HashSet<TriplePath>());
-            s2.add(pair.getLeft());
-            clustered.put(new Pair<TriplePath,Boolean>(pair.getRight(),true),s2);
+    public static boolean TestConnectivityWithPath(Set<TriplePath> value) {
+        DirectedGraph<String,DefaultEdge> graph = makeDirectedGraph(value, true);
+        if(!testConnectivityAndNoCycles(graph)){
+            return false;
         }
 
-
-        for(Map.Entry<Pair<TriplePath,Boolean>,Set<TriplePath>> entry : clustered.entrySet()){
-            if(entry.getValue().size()>1){
-                if(testConnectivity(entry.getValue())){
-                    Path path = PathFactory.pathOneOrMore1(PathFactory
-                            .pathAlt(PathFactory.pathLink(entry.getKey().getLeft().getPredicate()),
-                                    PathFactory.pathInverse(
-                                            PathFactory.pathLink(entry.getKey().getLeft().getPredicate()))));
-
-                    result.addTriplePath(new TriplePath(entry.getKey().getLeft().getSubject(),
-                            path,entry.getKey().getLeft().getObject()));
-
-//                    Pair<Node,Node>  source_sink = t
-
-
-
-                }
-                if(entry.getKey().getRight()) {
-                    for (TriplePath t :
-                            entry.getValue()) {
-                        matching.remove(new Pair<TriplePath, TriplePath>(t, entry.getKey().getLeft()));
-                    }
-                }else {
-                    for (TriplePath t :
-                            entry.getValue()) {
-                        matching.remove(new Pair<TriplePath, TriplePath>(entry.getKey().getLeft(),t));
-                    }
-                }
-
+        TopologicalOrderIterator<String,DefaultEdge> itr = new TopologicalOrderIterator<String, DefaultEdge>(graph);
+        while( itr.hasNext()){
+            String node = itr.next();
+            if(graph.inDegreeOf(node)>1 || graph.outDegreeOf(node)>1){
+                return false;
             }
         }
-
-
-
-        for(Pair<TriplePath,TriplePath> match : matching){
-            Node sub = null;
-            Node obj =null;
-            Node pred = null;
-
-
-
-            if(match.getLeft().getSubject().matches(match.getRight().getSubject())) {
-
-                sub = match.getLeft().getSubject();
-            }
-            else{
-                if(var1.containsKey(match.getLeft().getSubject()) && var2.containsKey(match.getRight().getSubject())){
-                    Set<String> var = var1.get(match.getLeft().getSubject());
-                    var.retainAll(var2.get(match.getRight().getSubject()));
-                    if(var.size()>0){
-                        sub = new Node_Variable(var.iterator().next());
-                    }
-                }
-
-            }
-            if(sub==null) {
-                String v = var_itr.next();
-                sub= new Node_Variable(v);
-                Set<String> var1_set = var1.getOrDefault(match.getLeft().getSubject(),new HashSet<String>());
-                var1_set.add(v);
-                var1.put(match.getLeft().getSubject(),var1_set);
-
-                Set<String> var2_set = var2.getOrDefault(match.getRight().getSubject(),new HashSet<String>());
-                var2_set.add(v);
-                var2.put(match.getRight().getSubject(),var2_set);
-            }
-
-            if(match.getLeft().getObject().matches(match.getRight().getObject())) {
-
-                obj = match.getLeft().getObject();
-            }
-            else{
-                if(var1.containsKey(match.getLeft().getObject()) && var2.containsKey(match.getRight().getObject())){
-                    Set<String> var = var1.get(match.getLeft().getObject());
-                    var.retainAll(var2.get(match.getRight().getObject()));
-                    if(var.size()>0){
-                        obj = new Node_Variable(var.iterator().next());
-                    }
-                }
-
-            }
-            if(obj==null) {
-                String v = var_itr.next();
-                obj= new Node_Variable(v);
-                Set<String> var1_set = var1.getOrDefault(match.getLeft().getObject(),new HashSet<String>());
-                var1_set.add(v);
-                var1.put(match.getLeft().getObject(),var1_set);
-
-                Set<String> var2_set = var2.getOrDefault(match.getRight().getObject(),new HashSet<String>());
-                var2_set.add(v);
-                var2.put(match.getRight().getObject(),var2_set);
-            }
-            if(match.getLeft().getPredicate().matches(match.getRight().getPredicate())) {
-
-                pred = match.getLeft().getPredicate();
-            }else {
-                pred = new Node_Variable(var_itr.next());
-            }
-
-            result.addTriple(new Triple(sub,pred,obj));
-        }
-
-        return result;
-    }
-
-
-
-    private static boolean testConnectivity(Set<TriplePath> value) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
+    public static DirectedGraph<Node,DefaultEdge> makeDirectedGraphNodes(Set<TriplePath> pattern, boolean b){
+        DirectedGraph<Node,DefaultEdge> graph = new DefaultDirectedGraph<Node, DefaultEdge>(DefaultEdge.class);
+        for (TriplePath triple : pattern){
+            graph.addVertex(triple.getSubject());
+            graph.addVertex(triple.getObject());
+            graph.addEdge(triple.getSubject(),triple.getObject());
+        }
+        return graph;
+    }
+
+	static Pair<Node,Node> GetSourceSink(Set<TriplePath> value){
+        DirectedGraph<Node,DefaultEdge> graph = makeDirectedGraphNodes(value,true);
+
+        TopologicalOrderIterator<Node,DefaultEdge> itr = new TopologicalOrderIterator<Node, DefaultEdge>(graph);
+        Node source = itr.next();
+        Node sink=null;
+        while( itr.hasNext()){
+            sink = itr.next();
+
+        }
+
+        return new Pair<Node,Node>(source,sink);
+    }
 
 	/***
-     * Tests if there is a connetion between exam[le to other nodes
+     * Tests if there is a connetion between example to other nodes
      * @param pattern
      * @return
      */
-    public static boolean testBasicPatten(ElementPathBlock pattern){
-        UndirectedGraph<String,DefaultEdge> graph = new SimpleGraph<String,DefaultEdge>(DefaultEdge.class);
+    public static boolean testBasicPatten(Filterable pattern){
+        boolean flag = false;
+        UndirectedGraph<String,DefaultEdge> graph = new Pseudograph<String, DefaultEdge>(DefaultEdge.class);
         for (TriplePath triple : pattern.getPattern()){
+            if((triple.getSubject().isVariable() && triple.getSubject().getName().contains("example"))
+                    || (triple.getObject().isVariable() && triple.getObject().getName().contains("example"))){
+                flag = true;
+            }
             graph.addVertex(triple.getSubject().toString());
             graph.addVertex(triple.getObject().toString());
             graph.addEdge(triple.getSubject().toString(),triple.getObject().toString());
         }
 
         ConnectivityInspector<String,DefaultEdge> CI = new ConnectivityInspector<String, DefaultEdge>(graph);
-        return CI.isGraphConnected();
+        return CI.isGraphConnected() && flag;
     }
 
-    public static DirectedGraph<String,DefaultEdge> makeGraph(Set<TriplePath> pattern){
-        DirectedGraph<String,DefaultEdge> graph = new SimpleDirectedGraph<String, DefaultEdge>(DefaultEdge.class);
+    public static class RelationshipEdge<V> extends DefaultEdge {
+        private V v1;
+        private V v2;
+        private Statement label;
+
+        public RelationshipEdge(V v1, V v2, Statement label) {
+            this.v1 = v1;
+            this.v2 = v2;
+            this.label = label;
+        }
+
+        public V getV1() {
+            return v1;
+        }
+
+        public V getV2() {
+            return v2;
+        }
+
+        public Statement GetNode(){
+            return this.label;
+        }
+        public String toString() {
+            return this.label.toString();
+        }
+    }
+    public static Model ConnectAllComponents(Node example, List<Node> explanations ,Model model){
+        Model res = ModelFactory.createDefaultModel();
+
+        UndirectedGraph<String,RelationshipEdge> graph =
+                new Pseudograph<String, RelationshipEdge>(new ClassBasedEdgeFactory<String, RelationshipEdge>(RelationshipEdge.class));
+
+        for (StmtIterator itr = model.listStatements(); itr.hasNext();){
+            Statement stmt = itr.next();
+            graph.addVertex(stmt.getSubject().toString());
+            graph.addVertex(stmt.getObject().toString());
+            graph.addEdge(stmt.getSubject().toString(),stmt.getObject().toString(),
+                    new RelationshipEdge<String>(stmt.getSubject().toString(),stmt.getObject().toString(),stmt));
+        }
+
+
+        KShortestPaths<String,RelationshipEdge> kshort = new KShortestPaths<String, RelationshipEdge>(graph,
+                example.toString(),1);
+
+        for(Node e : explanations){
+            List<GraphPath<String,RelationshipEdge>>path = kshort.getPaths(e.isLiteral()?e.getLiteral().toString():e.toString());
+            for(RelationshipEdge edge : path.get(0).getEdgeList()){
+                res.add(edge.GetNode());
+            }
+        }
+        return res;
+
+    }
+    public static DirectedGraph<String,DefaultEdge> makeDirectedGraph(Set<TriplePath> pattern, boolean b){
+        DirectedGraph<String,DefaultEdge> graph = new DefaultDirectedGraph<String, DefaultEdge>(DefaultEdge.class);
         for (TriplePath triple : pattern){
+
             graph.addVertex(triple.getSubject().toString());
             graph.addVertex(triple.getObject().toString());
+
             graph.addEdge(triple.getSubject().toString(),triple.getObject().toString());
         }
         return graph;
     }
-    public static boolean testConnectivityAndNoCycles(Set<TriplePath> pattern){
+    public static boolean testConnectivityAndNoCycles( DirectedGraph<String,DefaultEdge> graph){
 
-        DirectedGraph<String,DefaultEdge> graph = makeGraph(pattern);
         ConnectivityInspector<String,DefaultEdge> CI = new ConnectivityInspector<String, DefaultEdge>(graph);
         if(!CI.isGraphConnected())
             return false;
@@ -398,50 +386,7 @@ public class utils {
         return !cd.detectCycles();
     }
 
-    /**
-     * For graphs with no cycles
-     * @param pattern
-     * @return
-     */
-    public static Pair<Node,Node> getSourceSink(Set<TriplePath> pattern){
-        DirectedGraph<String,DefaultEdge> graph = makeGraph(pattern);
-        TopologicalOrderIterator<String,DefaultEdge> it = new TopologicalOrderIterator<String, DefaultEdge>(graph);
-        return null;
-    }
 
-    public static boolean getIsPath(Triple source ,Set<Triple> pattern){
-        DirectedGraph<String,DefaultEdge> graph = new SimpleDirectedGraph<String, DefaultEdge>(DefaultEdge.class);
-        for (Triple triple : pattern){
-            graph.addVertex(triple.getSubject().toString());
-            graph.addVertex(triple.getObject().toString());
-            graph.addEdge(triple.getSubject().toString(),triple.getObject().toString());
-        }
-
-
-        ConnectivityInspector<String,DefaultEdge> CI = new ConnectivityInspector<String, DefaultEdge>(graph);
-        if(!CI.isGraphConnected())
-            return false;
-
-        boolean s =false;
-        boolean o = false;
-        for (Triple triple : pattern){
-            if(graph.inDegreeOf(triple.getSubject().toString())==0 &&
-                    graph.outDegreeOf(triple.getSubject().toString())==1){
-                if(source.getSubject().toString().compareTo(triple.getSubject().toString())==0){
-                    s=true;
-                }
-
-            }
-            if(graph.outDegreeOf(triple.getObject().toString())==0 &&
-                    graph.inDegreeOf(triple.getObject().toString())==1){
-                if(source.getObject().toString().compareTo(triple.getObject().toString())==0){
-                    o=true;
-                }
-
-            }
-        }
-        return true;
-    }
 
     public static boolean testBoolArr(Boolean[] arr){
         return Arrays.stream(arr).reduce(true,(a,b)->Boolean.logicalAnd(a,b));
@@ -456,7 +401,7 @@ public class utils {
         return res;
     }
 
-
+/***
     public static ElementPathBlock FindMergeHandler(List<TriplePath> l1, List<TriplePath> l2, float[][] weightMatchMatrix,
                                                 Boolean[] mark1, Boolean[] mark2 ,
                                                 ArrayList<Pair<TriplePath,TriplePath>> matching,
@@ -529,7 +474,7 @@ public class utils {
         }
 
         if(testBoolArr(mark1) && testBoolArr(mark2)){
-            ElementPathBlock p = createMergedPattern(matching);
+            Filterable p = createMergedPattern(matching);
             if(p!=null && testBasicPatten(p)){
                 return p;
             }
@@ -542,7 +487,7 @@ public class utils {
 
 
     }
-
+***/
     static private Op flush(BasicPattern bp, Op op)
     {
         if ( bp == null || bp.isEmpty() )
@@ -554,12 +499,12 @@ public class utils {
     }
 
     /** Convert any paths of exactly one predicate to a triple pattern */
-    public static Op pathToTriples(PathBlock pattern)
+    public static Op queryBuilder(Filterable filt)
     {
         BasicPattern bp = null ;
         Op op = null ;
 
-        for ( TriplePath tp : pattern )
+        for ( TriplePath tp : filt.getPattern() )
         {
             if ( tp.isTriple() )
             {
@@ -576,9 +521,18 @@ public class utils {
             op = OpSequence.create(op, opPath2) ;
             continue ;
         }
-
         // End.  Finish off any outstanding BGP.
         op = flush(bp, op) ;
+        if(filt.getExpList().size()>0){
+            ExprList exprList  = new ExprList();
+            for(Expr expr : filt.getExpList()){
+                if((expr instanceof E_NotEquals) &&
+                        (((E_NotEquals) expr).getArg1().toString().startsWith("?")) &&
+                        (((E_NotEquals) expr).getArg2().toString().startsWith("?")))
+                    exprList.add(expr);
+            }
+            op = OpFilter.filter(exprList,op);
+        }
         return op ;
     }
 /*

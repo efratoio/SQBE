@@ -10,9 +10,9 @@ class Alphabet implements Iterable<String>{
     private char start;
     private char end;
 
-    public Alphabet(char start, char end) {
-        this.start=start;
-        this.end=end;
+    public Alphabet() {
+        this.start= 'a';
+        this.end= 'z';
     }
 
     @Override

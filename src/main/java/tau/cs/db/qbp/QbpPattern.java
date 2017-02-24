@@ -1,22 +1,34 @@
 package tau.cs.db.qbp;
 
+import org.apache.jena.sparql.algebra.Op;
+import org.apache.jena.sparql.algebra.op.OpFilter;
 import org.apache.jena.sparql.core.TriplePath;
+import org.apache.jena.sparql.core.Var;
+import org.apache.jena.sparql.expr.ExprList;
 import org.apache.jena.sparql.syntax.ElementPathBlock;
+import tau.cs.db.utils.RDF;
+
+import java.util.List;
 
 /**
  * Created by efrat on 10/12/16.
  */
-public class QbpPattern implements  Mergeable,Patternable{
+public class QbpPattern implements  QbpBasicPattern{
 
-    ElementPathBlock pattern;
+    Filterable filterPattern;
     Float IR;
+    Op op;
+    ExprList exprList;
+    public QbpPattern(List<TriplePath> tpList, ExprList exprList) {
 
-    public QbpPattern(ElementPathBlock pattern) {
-        this.pattern = pattern;
+        Filterable fb = new FilterablePatternDefault(tpList,exprList);
+        this.filterPattern = fb;
         int varsNum = 0;
         int pp = 0;
-        for(TriplePath triple : this.pattern.getPattern()){
+
+        for(TriplePath triple : this.filterPattern.getPattern()){
             if(triple.getSubject().isVariable()){
+
                 varsNum++;
             }
             if(!triple.isTriple()){
@@ -26,39 +38,78 @@ public class QbpPattern implements  Mergeable,Patternable{
                 varsNum++;
             }
         }
+        this.IR = new Float(varsNum)/((fb.getPattern().size()*2));
+    }
+    public QbpPattern(Filterable filteredPattern) {
 
-        this.IR = new Float(varsNum)/((pattern.getPattern().getList().size()*2)+pp*3);
+        this.filterPattern = filteredPattern;
+        int varsNum = 0;
+        int pp = 0;
+
+        for(TriplePath triple : this.filterPattern.getPattern()){
+            if(triple.getSubject().isVariable()){
+
+                varsNum++;
+            }
+            if(!triple.isTriple()){
+                pp++;
+            }
+            if(triple.getObject().isVariable()){
+                varsNum++;
+            }
+        }
+        this.IR = new Float(varsNum)/((filteredPattern.getPattern().size()*2));
     }
 
     @Override
     public String toString() {
-        return this.pattern.toString();
+        return "QbpPattern{" +
+                "filterPattern=" + filterPattern.toString() +
+                '}';
     }
 
     public Float GetIR(){
         return  this.IR;
     }
 
-    public QbpPattern mergePattern(QbpPattern pat){
-        TripleMerger tm = new TripleMerger(this.pattern.getPattern().getList(),pat.pattern.getPattern().getList());
-        ElementPathBlock patt = tm.merge();
-        if(patt == null){
-            return  null;
-        }
-        else{
-            return new QbpPattern(patt);
-        }
-    }
+//    public QbpPattern mergePattern(QbpPattern pat){
+//        TripleMerger tm = new TripleMerger(this.filterPattern.getPattern().getList(),pat.filterPattern.getPattern().getList());
+//        ElementPathBlock patt = tm.merge();
+//        if(patt == null){
+//            return  null;
+//        }
+//        else{
+//            return new QbpPattern(patt);
+//        }
+//    }
 
     @Override
-    public QbpPattern merge(Patternable t) {
-        TripleMerger tm = new TripleMerger(this.pattern.getPattern().getList(),t.getPattern().getPattern().getList());
-        ElementPathBlock patt = tm.merge();
+    public QbpBasicPattern merge(Filterable t) {
+        TripleMerger tm = new TripleMerger(this.filterPattern,t);
+        Filterable patt = tm.merge();
+        if(patt == null){
+            return null;
+        }
         return new QbpPattern(patt);
     }
 
     @Override
-    public ElementPathBlock getPattern() {
-        return this.pattern;
+    public List<TriplePath> getPattern() {
+        return this.filterPattern.getPattern();
+    }
+
+    @Override
+    public ExprList getExpList() {
+        return this.filterPattern.getExpList();
+    }
+
+
+    public boolean isomorphicTo(QbpBasicPattern qbpPattern) {
+        return utils.isBgpIsomorphic(this.getPattern(),qbpPattern.getPattern());
+    }
+
+    @Override
+    public Float getIR() {
+        return this.IR;
     }
 }

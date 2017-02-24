@@ -18,12 +18,12 @@ import java.util.List;
  */
 public class QE {
 
-    static String queryPath = "./files/queries/%s.sparql";
-    static String testQueryPath = "./files/examples/%s/queries/%s.sparql";
+    static String queryPath = "./files/%s/queries/%s.sparql";
+    static String testQueryPath = "./files/%s/examples/%s/queries/%s.sparql";
 
-    public static Query TestQueryFromFile(String queryName,String testQuery){
+    public static Query TestQueryFromFile(String ontName,String queryName,String testQuery){
         String content = null;
-        String filePath = String.format(testQueryPath,queryName,testQuery);
+        String filePath = String.format(testQueryPath,ontName,queryName,testQuery);
         try {
             content = Files.toString(new File(filePath), Charsets.UTF_8);
         } catch (IOException e) {
@@ -35,9 +35,9 @@ public class QE {
         return query;
     }
 
-    public static Query QueryFromFile(String queryName){
+    public static Query QueryFromFile(String ontName,String queryName){
         String content = null;
-        String filePath = String.format(queryPath,queryName);
+        String filePath = String.format(queryPath,ontName,queryName);
         try {
             content = Files.toString(new File(filePath), Charsets.UTF_8);
         } catch (IOException e) {
@@ -49,21 +49,22 @@ public class QE {
         return query;
     }
 
-    public static Pair<List<Node>,String> KRandomExamples(String queryName, Model model, int k){
+    public static Pair<List<Node>,String> KRandomExamples(String ontName,String queryName, Model model, int k) throws NoExampleException {
 
-        Query query = QueryFromFile(queryName);
+        Query query = QueryFromFile(ontName,queryName);
         QueryExecution qExec = QueryExecutionFactory.create(query, model);
 
         ResultSet rset = qExec.execSelect();
         List<Node> result = new ArrayList<>();
         while(rset.hasNext()){
             Binding sln = rset.nextBinding();
-            if(Math.random()>0.5){
-                result.add(sln.get(query.getProjectVars().get(0)));
-            }
+            result.add(sln.get(query.getProjectVars().get(0)));
             if(result.size()==k){
                 break;
             }
+        }
+        if(result.size()==0){
+            throw new NoExampleException();
         }
 
         return new Pair<List<Node>,String>(result,query.getResultVars().get(0));

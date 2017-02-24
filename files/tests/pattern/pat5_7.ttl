@@ -1,5 +1,3 @@
 <http://localhost/IA> <http://localost/PB> <http://localhost/CA> .
 <http://localhost/IA> <http://localhost/PA> ?a .
-?a <http://localost/PB> ?b .
-?a <http://localhost/PA> <http://localhost/IC> .
-<http://localhost/IC> <http://localost/PB> ?c .
+?a <http://localost/PB> <http://localhost/CA> .

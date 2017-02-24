@@ -1,0 +1,4 @@
+<https://localhost/A> <https://localhost/P1> ?d .
+?d <https://localhost/P2> <https://localhost/C> .
+?c <https://localhost/P2> <https://localhost/C> .
+?d <https://localhost/P2> ?c .

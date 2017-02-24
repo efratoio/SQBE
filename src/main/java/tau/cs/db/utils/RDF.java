@@ -6,19 +6,25 @@ import org.apache.jena.graph.Node;
 import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.graph.Node_Variable;
 import org.apache.jena.graph.Triple;
+import org.apache.jena.ontology.Ontology;
+import org.apache.jena.ontology.impl.OntologyImpl;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.sparql.core.BasicPattern;
+import org.apache.jena.sparql.core.TriplePath;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.engine.binding.Binding;
 import org.apache.jena.sparql.engine.binding.BindingFactory;
 import org.apache.jena.sparql.sse.SSE;
+import org.apache.jena.sparql.syntax.ElementPathBlock;
 import org.apache.jena.util.FileManager;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.jws.WebParam;
 import java.io.*;
 import java.util.Iterator;
 
@@ -27,8 +33,35 @@ import java.util.Iterator;
  */
 public class RDF {
 
+    public static ElementPathBlock allocVars(ElementPathBlock pattern){
+        ElementPathBlock result = new ElementPathBlock();
+        for(TriplePath tp : pattern.getPattern()){
+            result.addTriplePath(new TriplePath(
+                    tp.getSubject().isVariable()?Var.alloc(tp.getSubject()): tp.getSubject(),
+                    tp.getPath(),
+                    tp.getObject().isVariable()?Var.alloc(tp.getObject()): tp.getObject()
+            ));
+
+
+        }
+        return result;
+
+
+    }
+
+    public static Statement triple2Statement(Triple t){
+        if(t.getObject().isLiteral()) {
+            return ResourceFactory.createStatement(ResourceFactory.createResource(t.getSubject().toString()),
+                    ResourceFactory.createProperty(t.getPredicate().toString()),
+                    ResourceFactory.createPlainLiteral(t.getObject().toString()));
+        }else{
+            return ResourceFactory.createStatement(ResourceFactory.createResource(t.getSubject().toString()),
+                    ResourceFactory.createProperty(t.getPredicate().toString()),
+                    ResourceFactory.createResource(t.getObject().toString()));
+        }
+    }
     public static BasicPattern model2Basicpattern(Model model) {
-        BasicPattern result=new BasicPattern();;
+        BasicPattern result=new BasicPattern();
         Iterator<Statement> stItr = model.listStatements();
 
         while (stItr.hasNext()) {
@@ -111,16 +144,18 @@ public class RDF {
 
     public static Model loadModel(String modelString, String format)
     {
-
-        File file = new File("temp."+format);
-        try {
-            Files.write(modelString, file, Charsets.UTF_8);
-            return loadModel("temp."+format);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        Model model = ModelFactory.createDefaultModel();
+        model.read(new ByteArrayInputStream(modelString.getBytes()), null,"TTL");
+        return model;
+//        File file = new File("temp."+format);
+//        try {
+//            Files.write(modelString, file, Charsets.UTF_8);
+//            return loadModel("temp."+format);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
     }
     /**
      * Creates a binding from json file

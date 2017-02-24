@@ -2,15 +2,20 @@ package tau.cs.db;
 
 import org.apache.jena.query.Query;
 import org.apache.jena.rdf.model.Model;
+import org.apache.jena.sparql.algebra.Algebra;
+import org.apache.jena.sparql.algebra.Op;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tau.cs.db.qbp.QbpExplanation;
 import tau.cs.db.qbp.QbpLearner;
 import tau.cs.db.qbp.QbpPattern;
 import tau.cs.db.utils.Experiment;
+import tau.cs.db.utils.NoExampleException;
+import tau.cs.db.utils.QE;
 import tau.cs.db.utils.RDF;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -28,152 +33,98 @@ public class App
      * @return the model loaded
      */
 
-    public static  void RunExperiment(Model model,String queryName,int k){
+    public static  void RunExperiment(Model model,String ontName,String queryName,int k,boolean chooseExamples,boolean prov) throws Exception {
 
-        Experiment.CreateExperiment(queryName,model,k);
-//       Experiment.CreateSets("q8",model);
-        List<QbpExplanation> res = Experiment.LoadSets(queryName);
-//        TreeMap<QbpPattern,Set<QbpExplanation>> matching = QbpLearner.ComputeMatching(res);
-        Query q = QbpLearner.unifyBest(res);
-        File provFile = new File(String.format("./files/examples/%s/query.txt", queryName));
-        if(!provFile.exists()){
-            try{
-                provFile.createNewFile();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        try(FileWriter fileWriter = new FileWriter(provFile)) {
-            fileWriter.write(q.toString());
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-//
-
-//
-//        try(FileWriter fileWriter = new FileWriter(provFile)) {
-//            for(Map.Entry<QbpPattern,Set<QbpExplanation>> e: matching.entrySet()){
-//                fileWriter.write(e.getKey().toString());
-//                fileWriter.write(String.format("\nIR: %f\n",e.getKey().GetIR()));
-//                fileWriter.write("\n\n---------------------------\n");
-//                for(QbpExplanation exp : e.getValue()){
-//                    fileWriter.write(exp.toString());
-//                    fileWriter.write("\n\n\n");
-//                }
-//                fileWriter.write("\n\n\n#################################################\n\n\n");
-//            }
-//
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//        File resultsFile = new File(String.format("./files/examples/%s/resulst.txt", queryName));
-//        if(!resultsFile.exists()){
-//            try{
-//                resultsFile.createNewFile();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//
-//        try(FileWriter fileWriter = new FileWriter(resultsFile)) {
-//
-//            for(QbpPattern patt : matching.keySet()){
-//                fileWriter.write(patt.toString());
-//                fileWriter.write(String.format("\n\nIR %f\n\n", patt.GetIR()));
-//
-//                fileWriter.write("\n\n\n#################################################\n\n\n");
-//            }
-//
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    public static void main( String[] args )
-    {
 
         Logger logger = LoggerFactory.getLogger(App.class);
 
+        if(chooseExamples) {
 
-//
-//        Binding binding = RDF.loadBindin
+            try {
+                Experiment.CreateExperiment(ontName, queryName, model, k);
 
-// g("/home/efrat/Documents/SQBE/files/examples/q3a/example1.JSON");
-//
-//
-//
-        Model model = RDF.loadModel("/home/efrat/Documents/SQBE/files/ontology/sp2b.n3");
-//
+            } catch (NoExampleException ex) {
+                logger.info("Not examples");
 
-        RunExperiment(model,"q8",8);
+                throw ex;
+            }
+        }
+        if(prov) {
+            Experiment.CreateSets(ontName,queryName,model,k);
+        }
+        List<QbpExplanation> res = Experiment.LoadSets(ontName,queryName);
+//        TreeMap<QbpPattern,Set<QbpExplanation>> matching = QbpLearner.ComputeMatching(res);
+        // List<Query> q = QbpLearner.LearnQuery(res,3);
 
-//
-//        Experiment.CreateExperiment("q6",model,20);
-//        List<QbpExplanation> res = Experiment.LoadSets("q6");
-//        TreeMap<QbpPattern,Set<QbpExplanation>>  matching = QbpLearner.ComputeMatching(res);
-//
-//        File provFile = new File("./files/examples/q6/run.txt");
-//        if(!provFile.exists()){
-//            try{
-//                provFile.createNewFile();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//
-//        try(FileWriter fileWriter = new FileWriter(provFile)) {
-//            for(Map.Entry<QbpPattern,Set<QbpExplanation>> e: matching.entrySet()){
-//                fileWriter.write(e.getKey().toString());
-//                fileWriter.write(String.format("\nIR: %f\n",e.getKey().GetIR()));
-//                fileWriter.write("\n\n---------------------------\n");
-//                for(QbpExplanation exp : e.getValue()){
-//                    fileWriter.write(exp.toString());
-//                    fileWriter.write("\n\n\n");
-//                }
-//                fileWriter.write("\n\n\n#################################################\n\n\n");
-//            }
-//
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        List<Integer> weights = new ArrayList<>();
+
+        weights.add(5);
+
+
+        // weights.add(90);
+        for(int w : weights){
+            new File(String.format("./files/%s/examples/%s/weights/%d/",ontName, queryName,w)).mkdirs();
+            QbpLearner.W1=w;
+            List<Query> q = QbpLearner.LearnQuery(res,5);
+            int j=0;
+            for(Query query: q){
+                j++;
+                File qf = new File(String.format("./files/%s/examples/%s/weights/%d/query%d.sparql", ontName,queryName,w,j));
+                if(!qf.exists()){
+                    try{
+                        qf.createNewFile();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                try(FileWriter fileWriter = new FileWriter(qf)) {
+                    fileWriter.write(query.toString());
+                    logger.info(String.format("weight %d", w));
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+    }
+
+    public static void main( String[] args ) throws Exception {
+
+        Logger logger = LoggerFactory.getLogger(App.class);
+
+        String ontName = "bsbm";
+
+
+        Model model = RDF.loadModel(String.format("/home/efrat/Documents/SQBE/files/%s/ontology/dataset.ttl", ontName));
+        File f = new File(String.format("/home/efrat/Documents/SQBE/files/%s/examples", ontName)); // current directory
+        logger.info("loaded model");
+        File[] files = f.listFiles();
+        for (File file : files) {
+            try {
+                logger.info(file.getName());
+                RunExperiment(model, ontName, file.getName(), 2,true,true);
+            }catch(NoExampleException ex){
+                File qf = new File(String.format("./files/%s/examples/%s/NoExamples", ontName,file.getName()));
+                if(!qf.exists()){
+                    try{
+                        qf.createNewFile();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+
 
         logger.info("hi");
-
-//
-//
-////        String content = null;
-////        try {
-////            content = Files.toString(new File("/home/efrat/Documents/SQBE/files/queries/q3a.sparql"), Charsets.UTF_8);
-////        } catch (IOException e) {
-////            e.printStackTrace();
-////            return;
-////        }
-////
-////        Query query = QueryFactory.create(content);
-////
-////
-////
-////        Query provQuery = ProvenanceGenerator.CreateProvenanceQuery(binding,query);
-////
-////        logger.info(provQuery.toString());
-////
-////        Model provModel = ProvenanceGenerator.ExecuteProvenanceQuery(provQuery,mode
-//        BBLearner learner = new sparqlbyeLearner(model,"/home/efrat/Documents/SQBE/files/examples/q3a/results.JSON");
-//        Collection<Query> queries = learner.learnQueries();
-//
-//        for(Query q : queries){
-//            logger.info(q.toString());
-//        }
 
 
     }

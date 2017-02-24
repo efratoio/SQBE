@@ -1,0 +1,5 @@
+<http://localhost/IA> <http://localost/PB> <http://localhost/CA> .
+<http://localhost/IA> <http://localhost/PA> <http://localhost/ID> .
+<http://localhost/ID> <http://localost/PB> <http://localhost/CB> .
+<http://localhost/ID> <http://localhost/PA> <http://localhost/IC> .
+<http://localhost/IC> <http://localost/PB> <http://localhost/CC> .

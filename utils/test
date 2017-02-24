@@ -1,0 +1,37 @@
+
+#!/usr/bin/python
+
+import os.path
+import sys, getopt
+import argparse
+from os import listdir
+from os.path import isfile, join
+
+files_path = "../files/%s/%s/"
+examples="examples"
+ontology="ontology"
+queries="queries"
+explanations="explanations"
+
+
+def main(argv):
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-o','--ontology', help='Name of ontology', required=True)
+    parser.add_argument('-c','--clear', help='Clear the experiment data', required=True,action='store_true')
+    parser.add_argument('-f','--filter', help='Filter the experiment data', required=True,action='store_true')
+    parser.add_argument('-a','--all', help='Clear all experiment data')
+    args = parser.parse_args()
+
+    if args.ontology:
+        path = files_path%(args.ontology,examples)
+    if args.clear:
+        for f in listdir(path):
+            os.system("rm -R %s "%(os.path.join(path,f,explanations,"*")))
+    if args.filter:
+        for f in listdir(path):
+            if os.path.isfile(os.path.join(path,"NoExamples")):
+                os.system("rm -R %s "%(os.path.join(path,f,explanations,"*")))
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

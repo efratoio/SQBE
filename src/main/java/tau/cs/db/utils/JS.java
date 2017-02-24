@@ -23,12 +23,12 @@ import java.util.List;
  */
 public class JS {
 
-    static String examplesPath = "./files/examples/%s/examples.json";
-    static String explanationsDir = "./files/examples/%s/results/%d.json";
+    static String examplesPath = "./files/%s/examples/%s/examples.json";
+    static String explanationsDir = "./files/%s/examples/%s/results/%d.json";
 
-    public static void WriteExamplesJson(String queryName,String varName,List<Node> results){
+    public static void WriteExamplesJson(String ontName,String queryName,String varName,List<Node> results){
         JSONParser parser = new JSONParser();
-        String jsonFile = String.format(examplesPath, queryName);
+        String jsonFile = String.format(examplesPath, ontName, queryName);
 
         JSONArray exapmles = new JSONArray();
         for(Node example : results){
@@ -73,14 +73,17 @@ public class JS {
         return ResultSetFactory.fromJSON(in);
     }
 
-    public static ResultSet JS2ResultSet(String queryName,int exampleNum){
+    public static ResultSet JS2ResultSet(String ontName,String queryName,int exampleNum) throws IOException {
 
-        String filePath = String.format(explanationsDir,queryName,exampleNum);
-        InputStream in = FileManager.get().open(filePath);
+        String filePath = String.format(explanationsDir,ontName,queryName,exampleNum);
+        new File(String.format("./files/%s/examples/%s/results", ontName,queryName)).mkdir();
+        File file=  new File(filePath);
+        file.createNewFile();
+        InputStream in = new FileInputStream(file);
         return ResultSetFactory.fromJSON(in);
     }
-    public static void formatJsonToResultSet(String queryName){
-        String jsonFile = String.format(examplesPath, queryName);
+    public static void formatJsonToResultSet(String ontName,String queryName){
+        String jsonFile = String.format(examplesPath,ontName, queryName);
         JSONParser parser = new JSONParser();
         Object obj = null;
         try {
@@ -108,7 +111,7 @@ public class JS {
             JSONObject writeObj = new JSONObject();
 
             JSONArray headArr = new JSONArray();
-            headArr.add((String) jsonObject.get("var").toString());
+            headArr.add(jsonObject.get("var").toString());
 
             JSONObject varObj = new JSONObject();
             varObj.put("vars", headArr);
@@ -123,15 +126,15 @@ public class JS {
             }else {
                 singleObject.put("type", "uri");
             }
-            singleObject.put("value", (String) jsonObject.get("value").toString());
+            singleObject.put("value", jsonObject.get("value").toString());
 
-            bindObj.put((String) jsonObject.get("var").toString(), singleObject);
+            bindObj.put(jsonObject.get("var").toString(), singleObject);
             bindingArr.add(bindObj);
             resultObj.put("bindings", bindingArr);
 
             writeObj.put("results", resultObj);
 
-            String targetFile = String.format(explanationsDir, queryName,i);
+            String targetFile = String.format(explanationsDir, ontName,queryName,i);
             FileWriter fileWriter = null;
             try {
 
