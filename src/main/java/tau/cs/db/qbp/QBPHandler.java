@@ -8,6 +8,7 @@ import org.apache.jena.util.FileManager;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import tau.cs.db.prov.ProvenanceGenerator;
+import tau.cs.db.utils.Experiment;
 import tau.cs.db.utils.RDF;
 
 
@@ -25,7 +26,7 @@ public class QBPHandler {
     Map<String, Integer> node2Num;
     Map<Statement, Integer> statement2Num;
     List<QbpExplanation> explanations;
-
+    QuestionIterator itr;
 //    public static Model loadModel(String filePath)
 //    {
 //        Model model = ModelFactory.createDefaultModel();
@@ -73,16 +74,114 @@ public class QBPHandler {
 
 
     }
+    public enum State{ FIRST,SECOND,NOT_ACTIVE }
+
+    class QuestionIterator implements Iterator<Pair<Model,Node>>{
+        List<Query> queryList;
+        Model model;
+        State state;
+        Pair<Model,Node> pair;
+
+        public void Answer(boolean answer){
+            if(this.state==State.NOT_ACTIVE)
+                return;
+            if((answer && this.state==State.FIRST) || (!answer && this.state==State.SECOND)){
+                this.queryList.remove(1);
+            }else{
+                this.queryList.remove(0);
+            }
+        }
+
+        public Query ReturnQuery(){
+            return this.queryList.get(0);
+        }
+        public QuestionIterator(List<Query> queryList,Model model) {
+            this.queryList = queryList;
+            this.model = model;
+            this.state = State.NOT_ACTIVE;
+            this.pair = null;
+        }
+
+        @Override
+        public boolean hasNext() {
+
+            while(this.queryList.size()>1){
+                try {
+                    Pair<Model, Node> pair = ProvenanceGenerator.CreateDiffModel(this.queryList.get(0), this.queryList.get(1), this.model);
+                    if (pair != null) {
+                        this.state = State.FIRST;
+                        this.pair = pair;
+                        return true;
+//                    if (Experiment.CheckDiffExample(ontName, queryName, pair.getLeft().asRDFNode(pair.getRight()), pair.getLeft())) {
+//                        queryList.remove(1);
+//                    } else {
+//                        queryList.remove(0);
+//                    }
+                    } else {
+                        pair = ProvenanceGenerator.CreateDiffModel(queryList.get(1), queryList.get(0), model);
+                        if (pair != null) {
+                            this.state = State.SECOND;
+                            this.pair = pair;
+                            return true;
+//                        if (Experiment.CheckDiffExample(ontName, queryName, pair.getLeft().asRDFNode(pair.getRight()), pair.getLeft())) {
+//                            queryList.remove(0);
+//                        } else {
+//                            queryList.remove(1);
+//                        }
+                        } else {
+                            Query q = queryList.remove(0);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+            return false;
+
+        }
+
+        @Override
+        public Pair<Model,Node> next() {
+            return  pair;
+        }
+
+    }
+    public void InitQuestionIterator() throws InvalidPropertiesFormatException {
+        List<Query> qList = QbpLearner.LearnQuery(this.explanations,3,model);
+        this.itr = new QuestionIterator(qList,this.model);
+    }
+    public boolean HasMoreQuestions(){
+        return  this.itr.hasNext();
+    }
+
+    public JSONArray GetQuestion(){
+
+        Pair<Model,Node> pair =  this.itr.next();
+        return ModelToJS(pair.getLeft(),this.node2Num.get(pair.getRight()));
+
+    }
+
+    public void AnswerQuestion(boolean b){
+        this.itr.Answer(b);
+    }
+
+    public Query GetTop1Query(){
+        if(this.itr == null){
+            return null;
+        }
+        return this.itr.ReturnQuery();
+    }
 
     public String GetQuery() throws InvalidPropertiesFormatException {
 
-        List<Query> q = QbpLearner.LearnQuery(this.explanations,5);
+        List<Query> q = QbpLearner.LearnQuery(this.explanations,5,model);
         this.explanations.clear();
         return q.get(0).toString();
 
     }
-    public JSONArray GetProvenanceGraph(int nodeNum){
-        Model model = ProvenanceGenerator.getNodeEnviornment( this.model.getRDFNode(this.allNodes.get(nodeNum)),this.model);
+
+    private JSONArray ModelToJS(Model model, int nodeNum){
         Set<Node> allNodes = new HashSet<>();
         for (final ResIterator it = model.listSubjects(); it.hasNext();) {
             allNodes.add(it.next().asNode());
@@ -106,7 +205,7 @@ public class QBPHandler {
             JSONObject lk = new JSONObject();
             lk.put("id",this.allStatements.indexOf(stm));
             lk.put("source",this.node2Num.get(stm.getSubject().getLocalName()));
-                                                                    lk.put("label",stm.getPredicate().getLocalName());
+            lk.put("label",stm.getPredicate().getLocalName());
             if(stm.getObject().isLiteral()) {
                 lk.put("target", this.node2Num.get(stm.getObject().toString()));
             }else{
@@ -125,6 +224,11 @@ public class QBPHandler {
         result.add(ja);
         result.add(prop);
         return result;
+    }
+
+    public JSONArray GetProvenanceGraph(int nodeNum){
+        Model model = ProvenanceGenerator.getNodeEnviornment( this.model.getRDFNode(this.allNodes.get(nodeNum)),this.model);
+        return ModelToJS(model, nodeNum);
 
     }
     public List<Pair<String,Integer>> FindNodes(String prefix){

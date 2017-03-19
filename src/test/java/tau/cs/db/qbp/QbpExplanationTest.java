@@ -39,7 +39,7 @@ public class QbpExplanationTest {
         p_test.addTriplePath(new TriplePath(example,PathFactory.pathLink(NodeFactory.createURI("http://P")),NodeFactory.createURI("http://C")));
         p_test.addTriplePath(new TriplePath(example,PathFactory.pathLink(NodeFactory.createURI("http://P")),NodeFactory.createURI("http://D")));
 
-        QbpPattern test = new QbpPattern(p_test.getPattern().getList(),new ExprList());
+        QbpPattern test = new QbpPattern(p_test.getPattern().getList());
         assertTrue(test.isomorphicTo(patt));
     }
 
@@ -55,7 +55,7 @@ public class QbpExplanationTest {
         p_test.addTriplePath(new TriplePath(example,PathFactory.pathLink(NodeFactory.createURI("http://P")),NodeFactory.createURI("http://B")));
         p_test.addTriplePath(new TriplePath(example,PathFactory.pathLink(NodeFactory.createURI("http://P")),NodeFactory.createURI("http://G")));
 
-        QbpPattern test = new QbpPattern(p_test.getPattern().getList(),new ExprList());
+        QbpPattern test = new QbpPattern(p_test.getPattern().getList());
 
 
         assertTrue(test.isomorphicTo(patt));

@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class GraphServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ServletContext context = this.getServletContext();
+        HttpSession context = request.getSession();
         QBPHandler qbpHandler = (QBPHandler) context.getAttribute("qbpHandler");
 
         if(!request.getParameterMap().containsKey("nodeList"))
@@ -87,7 +88,7 @@ public class GraphServlet extends HttpServlet {
         }
 
         response.setContentType("application/json");
-        ServletContext context = this.getServletContext();
+        HttpSession context = request.getSession();
         QBPHandler qbpHandler = (QBPHandler) context.getAttribute("qbpHandler");
         List<Integer> exps = new ArrayList<>();
         ((JSONArray)jsonObject.get("explanation")).forEach((e)->exps.add(Integer.parseInt(e.toString())));

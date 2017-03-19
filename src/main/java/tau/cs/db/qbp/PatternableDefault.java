@@ -9,10 +9,10 @@ import java.util.List;
 /**
  * Created by efrat on 25/01/17.
  */
-public class FilterablePatternDefault implements Filterable, Patternable {
+public class PatternableDefault implements  Patternable {
 
     List<TriplePath> pattern;
-    ExprList exprList;
+//    ExprList exprList;
 
     @Override
     public String toString() {
@@ -21,9 +21,9 @@ public class FilterablePatternDefault implements Filterable, Patternable {
                 '}';
     }
 
-    public FilterablePatternDefault(List<TriplePath> pattern, ExprList exprList) {
+    public PatternableDefault(List<TriplePath> pattern) {
         this.pattern = pattern;
-        this.exprList = exprList;
+//        this.exprList = exprList;
     }
 
     @Override
@@ -31,8 +31,5 @@ public class FilterablePatternDefault implements Filterable, Patternable {
         return this.pattern;
     }
 
-    @Override
-    public ExprList getExpList() {
-        return this.exprList;
-    }
+
 }

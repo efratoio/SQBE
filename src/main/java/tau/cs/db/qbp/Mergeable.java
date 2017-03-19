@@ -7,5 +7,5 @@ import java.util.logging.Filter;
  * Created by efrat on 21/12/16.
  */
 public interface Mergeable {
-    public QbpBasicPattern merge(Filterable t);
+    public QbpBasicPattern merge(Patternable t);
 }

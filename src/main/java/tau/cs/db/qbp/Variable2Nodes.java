@@ -1,8 +1,10 @@
 package tau.cs.db.qbp;
 
+import com.github.andrewoma.dexx.collection.Sets;
 import org.apache.jena.graph.Node;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,7 +21,7 @@ public class Variable2Nodes extends HashMap<Node,Set<String>> {
 
     @Override
     public Set<String> put(Node node, Set<String> strings) {
-        Set<String> res = super.put(node, strings);
+        Set<String> res = super.put(node, new HashSet<String>(strings));
         for(String s: strings){
             this.node2String.put(s,node);
         }

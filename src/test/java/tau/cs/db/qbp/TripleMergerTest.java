@@ -57,9 +57,9 @@ public class TripleMergerTest {
 
         ExprList exp2 = new ExprList(new E_NotEquals(new NodeValueNode(NodeFactory.createURI("http://A")),
                 new NodeValueNode(NodeFactory.createURI("http://D"))));
-        TripleMerger tm = new TripleMerger(new FilterablePatternDefault(l1,exp1),
-                new FilterablePatternDefault(l2,exp2));
-        Filterable p_merge = tm.merge();
+        TripleMerger tm = new TripleMerger(new PatternableDefault(l1),
+                new PatternableDefault(l2));
+        Patternable p_merge = tm.merge();
         ElementPathBlock p_test = new ElementPathBlock();
         p_test.addTriplePath(new TriplePath(NodeFactory.createURI("http://A"),PathFactory.pathLink(NodeFactory.createURI("http://B")),NodeFactory.createVariable("a")));
         assertTrue("Test failed with null ",p_merge!=null);

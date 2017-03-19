@@ -23,6 +23,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <slf4j.version>1.7.12</slf4j.version>
+      <!-- current log4j 2 release -->
+      <log4j.version>2.7</log4j.version>
   </properties>
 
   <repositories>
@@ -62,11 +65,7 @@
       <artifactId>slf4j-api</artifactId>
       <version>1.7.12</version>
     </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>1.7.12</version>
-    </dependency>
+
 
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
@@ -99,6 +98,21 @@
           <artifactId>junit</artifactId>
           <version>4.10</version>
       </dependency>
+      <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-api</artifactId>
+          <version>2.7</version>
+      </dependency>
 
+      <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-core</artifactId>
+          <version>2.7</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-slf4j-impl</artifactId>
+          <version>2.7</version>
+      </dependency>
   </dependencies>
 </project>

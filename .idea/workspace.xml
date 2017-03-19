@@ -9,108 +9,48 @@
     </artifacts-to-build>
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpSet.java" line="176" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpSet.java" line="247" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77825e25-2ce5-4b19-8655-a680bc78f9db" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/com_sun_jersey_jersey_bundle_1_8.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/REST/HelloWorld.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Filterable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/FilterablePatternDefault.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/MatchTriplePath.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpBasicPattern.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpQuerySuggestion.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Variable2Nodes.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/FilterServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/GraphServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/QueryServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/qbpListener.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/NoExampleException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/utils/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/utils/test" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_guava_guava_io_r03.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/com_googlecode_json_simple_json_simple_1_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jgrapht_jgrapht_0_6_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/org_apache_commons_commons_math3_3_6_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/examples/q1/explanations/exp1/prov.ttl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/examples/q1/explanations/exp4/prov.ttl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/examples/q2/explanations/exp1/prov.ttl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/examples/q2/explanations/exp2/prov.ttl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/examples/q2/explanations/exp3/prov.ttl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/examples/q2/explanations/exp4/prov.ttl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/examples/q3a/example1.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/examples/q3a/mod.ttl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/examples/q3a/pat.ttl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/examples/q6/queries/q1.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/examples/q6/queries/q2.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/examples/q8/examples.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/examples/q8/queries/q1.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/examples/q8/queries/q2.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/ontology/sp2b.n3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q1.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q10.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q11.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q12a.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q12b.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q12c.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q2.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q3a.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q3b.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q3c.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q4.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q5a.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q5b.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q6.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q7.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q8.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/queries/q9.sparql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/tests/pattern/pat11.ttl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/tests/pattern/pat12.ttl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/tests/pattern/pat13.ttl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/files/tests/pattern/pat14.ttl" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/log4j_log4j_1_2_17.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/org_slf4j_slf4j_log4j12_1_7_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/configuration.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/DiffServlet.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/WEB-INF/resources/dataset.ttl" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_12.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_simple_1_7_12.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/com_sun_jersey_jersey_bundle_1_8.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/REST/HelloWorld.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/sparqlbyeLearner.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/FilterablePatternDefault.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/PatternableDefault.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SQBE.iml" afterPath="$PROJECT_DIR$/SQBE.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/tests/isomorphism/pat2.ttl" afterPath="$PROJECT_DIR$/files/tests/isomorphism/pat2.ttl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/tests/isomorphism/pat3.ttl" afterPath="$PROJECT_DIR$/files/tests/isomorphism/pat3.ttl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/tests/isomorphism/pat4.ttl" afterPath="$PROJECT_DIR$/files/tests/isomorphism/pat4.ttl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/tests/pattern/pat5_6.ttl" afterPath="$PROJECT_DIR$/files/tests/pattern/pat5_6.ttl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/tests/pattern/pat5_7.ttl" afterPath="$PROJECT_DIR$/files/tests/pattern/pat5_7.ttl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/tests/provenance/prov1.ttl" afterPath="$PROJECT_DIR$/files/tests/provenance/prov1.ttl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/tests/provenance/prov2.ttl" afterPath="$PROJECT_DIR$/files/tests/provenance/prov2.ttl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/tests/provenance/prov3.ttl" afterPath="$PROJECT_DIR$/files/tests/provenance/prov3.ttl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/tests/provenance/prov4.ttl" afterPath="$PROJECT_DIR$/files/tests/provenance/prov4.ttl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/tests/provenance/prov5.ttl" afterPath="$PROJECT_DIR$/files/tests/provenance/prov5.ttl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/tests/provenance/prov6.ttl" afterPath="$PROJECT_DIR$/files/tests/provenance/prov6.ttl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/tests/provenance/prov7.ttl" afterPath="$PROJECT_DIR$/files/tests/provenance/prov7.ttl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/App.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/App.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/prov/ProvenanceGenerator.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/prov/ProvenanceGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Alphabet.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Alphabet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Filterable.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Filterable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Mergeable.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Mergeable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Patternable.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Patternable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QBPHandler.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QBPHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpBasicPattern.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpBasicPattern.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpExplanation.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpExplanation.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpLearner.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpLearner.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpPattern.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpPattern.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpQuerySuggestion.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpQuerySuggestion.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/TripleMerger.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/TripleMerger.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Variable2Nodes.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Variable2Nodes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/utils.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/utils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/FilterServlet.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/FilterServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/GraphServlet.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/GraphServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/QueryServlet.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/QueryServlet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/SandboxServlet.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/SandboxServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/qbpListener.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/qbpListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/Experiment.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/Experiment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/JS.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/JS.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/QE.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/QE.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/RDF.java" afterPath="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/RDF.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QBPHandlerTest.java" afterPath="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QBPHandlerTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QbpExplanationTest.java" afterPath="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QbpExplanationTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QbpLearnerTest.java" afterPath="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QbpLearnerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QbpSetTest.java" afterPath="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QbpSetTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/TestUtils.java" afterPath="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/TestUtils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/TripleMergerTest.java" afterPath="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/TripleMergerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/utilsTest.java" afterPath="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/utilsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp.ttl" afterPath="$PROJECT_DIR$/temp.ttl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/test" afterPath="$PROJECT_DIR$/utils/test" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/REST/target/" />
@@ -122,7 +62,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/SQBE$script.coverage" NAME="script Coverage Results" MODIFIED="1487941538149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
+    <SUITE FILE_PATH="coverage/SQBE$script.coverage" NAME="script Coverage Results" MODIFIED="1488449575910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
+    <SUITE FILE_PATH="coverage/SQBE$App.coverage" NAME="App Coverage Results" MODIFIED="1488325593591" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SQBE$createtests.coverage" NAME="createtests Coverage Results" MODIFIED="1488351910046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -141,41 +83,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TripleMerger.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/TripleMerger.java">
+      <file leaf-file-name="QBPHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QBPHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="389" column="24" lean-forward="false" selection-start-line="389" selection-start-column="24" selection-end-line="389" selection-end-column="24" />
+            <state relative-caret-position="163">
+              <caret line="154" column="0" lean-forward="false" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
+              <folding>
+                <element signature="e#2906#2907#0" expanded="true" />
+                <element signature="e#2958#2959#0" expanded="true" />
+                <element signature="e#5260#5261#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dataset.ttl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/WEB-INF/resources/dataset.ttl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="136" column="29" lean-forward="false" selection-start-line="136" selection-start-column="25" selection-end-line="136" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="File.class" pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/io/File.class">
+      <file leaf-file-name="ProvenanceGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/prov/ProvenanceGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="316" column="0" lean-forward="false" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JS.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/utils/JS.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="574">
-              <caret line="153" column="9" lean-forward="false" selection-start-line="153" selection-start-column="9" selection-end-line="153" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QueryExecutionBase.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/../sparqlbye/target/sparqlbye-0.1.0-SNAPSHOT.jar!/org/apache/jena/sparql/engine/QueryExecutionBase.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="160" column="0" lean-forward="false" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
+            <state relative-caret-position="374">
+              <caret line="314" column="0" lean-forward="false" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -184,61 +120,70 @@
       <file leaf-file-name="QbpLearner.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpLearner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="142" column="0" lean-forward="false" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
+            <state relative-caret-position="391">
+              <caret line="241" column="0" lean-forward="false" selection-start-line="241" selection-start-column="0" selection-end-line="241" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QbpSet.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpSet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="List.class" pinned="false" current-in-tab="false">
+        <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/List.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="30" column="12" lean-forward="false" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QueryServlet.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/QueryServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FilterServlet.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/FilterServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="16" column="83" lean-forward="false" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="83" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3721#3730#0" expanded="true" />
+                <element signature="imports" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/App.java">
+      <file leaf-file-name="qbpListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/qbpListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="110" column="7" lean-forward="false" selection-start-line="110" selection-start-column="7" selection-end-line="110" selection-end-column="7" />
+            <state relative-caret-position="190">
+              <caret line="22" column="60" lean-forward="true" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/utils/test">
+      <file leaf-file-name="DiffServlet.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/DiffServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="33" column="78" lean-forward="false" selection-start-line="33" selection-start-column="78" selection-end-line="33" selection-end-column="78" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Experiment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/utils/Experiment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QE.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/utils/QE.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NoExampleException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/utils/NoExampleException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="31" lean-forward="false" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
+            <state relative-caret-position="646">
+              <caret line="49" column="64" lean-forward="true" selection-start-line="49" selection-start-column="64" selection-end-line="49" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -258,36 +203,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getE</find>
-      <find>servlets</find>
-      <find>'</find>
-      <find>SandboxServlet</find>
-      <find>referen</find>
-      <find>references3</find>
-      <find>initialBinding</find>
-      <find>references31</find>
-      <find>Expr</find>
-      <find>E_Equals</find>
-      <find>Equals</find>
-      <find>E_NotEquals</find>
-      <find>valu</find>
-      <find>litera</find>
-      <find>logger.info</find>
-      <find>NotEquals</find>
-      <find>createquery</find>
-      <find>random</find>
-      <find>graph</find>
-      <find>und</find>
-      <find>test</find>
-      <find>pair</find>
-      <find>E_</find>
-      <find>Logger</find>
-      <find>toString</find>
-      <find>merge</find>
-      <find>Check</find>
-      <find>logger</find>
       <find>Not examples</find>
       <find>Not Examples</find>
+      <find>NEqual</find>
+      <find>Equal</find>
+      <find>equal</find>
+      <find>map</find>
+      <find>RDFDataType</find>
+      <find>getLiteralDatatype</find>
+      <find>Les</find>
+      <find>getExpList</find>
+      <find>E_No</find>
+      <find>E_Not</find>
+      <find>merge</find>
+      <find>var1</find>
+      <find>mergeSuggMap</find>
+      <find>forEach</find>
+      <find>result</find>
+      <find>contains</find>
+      <find>NotEqual</find>
+      <find>QueryExecutio</find>
+      <find>addEx</find>
+      <find>CreateDiff</find>
+      <find>IR</find>
+      <find>getIR</find>
+      <find>Learn</find>
+      <find>Ask</find>
+      <find>k</find>
+      <find>prove.ttl</find>
+      <find>Erdo</find>
+      <find>Logger</find>
     </findStrings>
     <replaceStrings>
       <replace>CreateSetInt(i)</replace>
@@ -311,19 +256,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/MatchTriplePath.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Variable2Nodes.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/BasicPattern.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Mergeable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpBasicPattern.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpBasicExplanation.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QbpSetTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/utilsTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/TripleMergerTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/TestUtils.java" />
-        <option value="$PROJECT_DIR$/REST/src/main/java/RetrieveProvenance.java" />
-        <option value="$PROJECT_DIR$/REST/pom.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/REST/RetrieveProvenance.java" />
         <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/RE.java" />
         <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/REST/ProvenanceGetter.java" />
@@ -334,34 +266,47 @@
         <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/ProvenanceServlet.java" />
         <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/RDF.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/resources/sp2b.n3" />
-        <option value="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QbpExplanationTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpQuerySuggestion.java" />
         <option value="$PROJECT_DIR$/files/ont/examples/query2/queries/query2.sparql" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/qbpListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/prov/ProvenanceGenerator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/FilterServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/QueryServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/SandboxServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/GraphServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QBPHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/utils.java" />
         <option value="$PROJECT_DIR$/files/ont/examples/query1/explanations/query1e1/prov.ttl" />
         <option value="$PROJECT_DIR$/files/ont/examples/query1/explanations/query1e2/prov.ttl" />
         <option value="$PROJECT_DIR$/files/ont/examples/query1/explanations/query1e3/prov.ttl" />
         <option value="$PROJECT_DIR$/files/ont/examples/query1/weights/5/query1.sparql" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpExplanation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpPattern.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/FilterablePatternDefault.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpSet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpLearner.java" />
         <option value="$PROJECT_DIR$/files/ont/examples/query2/weights/5/query1.sparql" />
         <option value="$PROJECT_DIR$/files/ont/examples/query1/weights/5/query4.sparql" />
         <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/NoExampleException.java" />
         <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/QE.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/Experiment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/TripleMerger.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/App.java" />
         <option value="$PROJECT_DIR$/utils/test" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/FilterablePatternDefault.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Mergeable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpBasicExplanation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpExplanation.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QbpExplanationTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/TripleMergerTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Filterable.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QbpLearnerTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/JS.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Variable2Nodes.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/TripleMerger.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpBasicPattern.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/SandboxServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/qbpListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/FilterServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/GraphServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/DiffServlet.java" />
+        <option value="$PROJECT_DIR$/onfiguration.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/configuration.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpQuerySuggestion.java" />
+        <option value="$PROJECT_DIR$/files/ont/examples/query2/build.log" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpSet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpPattern.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/utils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/prov/ProvenanceGenerator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/utils/Experiment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/App.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/QueryServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QBPHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpLearner.java" />
       </list>
     </option>
   </component>
@@ -393,13 +338,12 @@
     </treeState>
   </component>
   <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/WebContent/node_modules" />
     <handled-path value="$PROJECT_DIR$/web/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="35" />
-    <option name="width" value="1920" />
-    <option name="height" value="1045" />
+    <option name="width" value="3200" />
+    <option name="height" value="1765" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -435,26 +379,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope">
-        <subPane subId="Problems">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="SQBE">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src/main/java">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -487,8 +411,230 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="utils" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="servlets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qbp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SQBE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="prov" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope">
+        <subPane subId="Problems">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="SQBE">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src/main/java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -501,10 +647,10 @@
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
-    <property name="project.structure.last.edited" value="Facets" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.3572594" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+    <property name="project.structure.side.proportion" value="0.49073327" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="last_opened_file_path" value="/usr/bin/python2.7" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="ToolWindowJava Enterprise.ShowToolbar" value="false" />
@@ -513,11 +659,9 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
+    <property name="ToolWindowEvent Log.ShowToolbar" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="tau.cs.db.utils" />
-    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="tau.cs.db.qbp" />
     </key>
@@ -527,43 +671,26 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="tau.cs.db" />
     </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="tau.cs.db.qbp" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web/WEB-INF/resources" />
+      <recent name="$PROJECT_DIR$/src/main/java/tau/cs/db/REST" />
+      <recent name="$PROJECT_DIR$/files" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web/src/resources" />
       <recent name="$PROJECT_DIR$/WebContent/src" />
       <recent name="$PROJECT_DIR$/files/examples" />
       <recent name="$PROJECT_DIR$/files/examples/q1/explanations/exp4" />
       <recent name="$PROJECT_DIR$/files/examples/q1/explanations/exp3" />
-      <recent name="$PROJECT_DIR$/files/examples/q1/explanations" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/tau/cs/db/REST" />
-      <recent name="$PROJECT_DIR$/files" />
-      <recent name="$PROJECT_DIR$/web/WEB-INF/resources" />
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="tau.cs.db.qbp" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="tau.cs.db.utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.App">
-    <configuration default="false" name="RetrieveProvenance" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="tau.cs.db.REST.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="tau.cs.db.REST.RetrieveProvenance" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="SQBE" />
-      <envs />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Tomcat Server.Tomcat7">
     <configuration default="false" name="ProvenanceGetter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -660,6 +787,24 @@
       </option>
       <envs />
       <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="createtests" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python2.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="SQBE" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/createtests.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
@@ -1312,7 +1457,7 @@
       <module name="SQBE" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/test" />
-      <option name="PARAMETERS" value="-o bsbm -c" />
+      <option name="PARAMETERS" value="-o ont -c" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
@@ -1405,7 +1550,6 @@
       </method>
     </configuration>
     <configuration default="false" name="Tomcat 7.0.47" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.47" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="SQBE:war exploded">
           <settings>
@@ -1484,19 +1628,19 @@
       <item index="4" class="java.lang.String" itemvalue="Python Remote Debug.Unnamed" />
       <item index="5" class="java.lang.String" itemvalue="Tomcat Server.Tomcat7" />
       <item index="6" class="java.lang.String" itemvalue="Tomcat Server.Tomcat 7.0.47" />
-      <item index="7" class="java.lang.String" itemvalue="Application.RetrieveProvenance" />
-      <item index="8" class="java.lang.String" itemvalue="Application.ProvenanceGetter" />
-      <item index="9" class="java.lang.String" itemvalue="JUnit.TripleMergerTest" />
-      <item index="10" class="java.lang.String" itemvalue="JUnit.QbpSetTest" />
-      <item index="11" class="java.lang.String" itemvalue="JUnit.QbpExplanationTest" />
+      <item index="7" class="java.lang.String" itemvalue="Application.ProvenanceGetter" />
+      <item index="8" class="java.lang.String" itemvalue="JUnit.TripleMergerTest" />
+      <item index="9" class="java.lang.String" itemvalue="JUnit.QbpSetTest" />
+      <item index="10" class="java.lang.String" itemvalue="JUnit.QbpExplanationTest" />
+      <item index="11" class="java.lang.String" itemvalue="Python.createtests" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.QbpExplanationTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.QbpSetTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.TripleMergerTest" />
-        <item index="3" class="java.lang.String" itemvalue="Application.ProvenanceGetter" />
-        <item index="4" class="java.lang.String" itemvalue="Application.RetrieveProvenance" />
+        <item index="0" class="java.lang.String" itemvalue="Python.createtests" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.QbpExplanationTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.QbpSetTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.TripleMergerTest" />
+        <item index="4" class="java.lang.String" itemvalue="Application.ProvenanceGetter" />
       </list>
     </recent_temporary>
   </component>
@@ -1528,7 +1672,21 @@
       <workItem from="1487470392417" duration="18031000" />
       <workItem from="1487677913404" duration="9335000" />
       <workItem from="1487750756080" duration="16050000" />
-      <workItem from="1487869045651" duration="30843000" />
+      <workItem from="1487869045651" duration="33279000" />
+      <workItem from="1488032504266" duration="28396000" />
+      <workItem from="1488263182627" duration="19758000" />
+      <workItem from="1488319398559" duration="15880000" />
+      <workItem from="1488365920947" duration="3184000" />
+      <workItem from="1488373954829" duration="5534000" />
+      <workItem from="1488389803007" duration="216000" />
+      <workItem from="1488390213670" duration="22633000" />
+      <workItem from="1488890121853" duration="16737000" />
+      <workItem from="1488916444486" duration="4139000" />
+      <workItem from="1488924052217" duration="1568000" />
+      <workItem from="1488967459374" duration="53000" />
+      <workItem from="1488975260319" duration="35157000" />
+      <workItem from="1489656053681" duration="7619000" />
+      <workItem from="1489899546888" duration="13572000" />
     </task>
     <servers />
   </component>
@@ -1565,7 +1723,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="478446000" />
+    <option name="totallyTimeSpent" value="655328000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1577,18 +1735,67 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="35" width="1920" height="1045" extended-state="6" />
+    <frame x="0" y="35" width="3200" height="1765" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.39327148" sideWeight="0.08458244" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32989025" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08404711" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1744627" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987687" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3364269" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="false" weight="0.32987687" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1352718" sideWeight="0.91541755" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32989025" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14326556" sideWeight="0.72002923" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14326556" sideWeight="0.27997077" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7031756" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987687" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50486064" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987687" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29698375" sideWeight="0.49785867" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32989025" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08404711" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7031756" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987687" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50486064" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1600,26 +1807,18 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="false" weight="0.32987687" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987687" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4176334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3549884" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32989025" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20074947" sideWeight="0.7928287" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20074947" sideWeight="0.20717132" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32830626" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20342612" sideWeight="0.78238344" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20342612" sideWeight="0.21761657" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32830626" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7031756" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987687" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50486064" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987687" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
@@ -1643,24 +1842,6 @@
           <option name="timeStamp" value="195" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpSet.java</url>
-          <line>32</line>
-          <properties />
-          <option name="timeStamp" value="220" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/TripleMergerTest.java</url>
-          <line>62</line>
-          <properties />
-          <option name="timeStamp" value="239" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/TripleMergerTest.java</url>
-          <line>61</line>
-          <properties />
-          <option name="timeStamp" value="241" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/REST/src/main/java/RetrieveProvenance.java</url>
           <line>26</line>
           <properties />
@@ -1668,7 +1849,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpPattern.java</url>
-          <line>107</line>
+          <line>108</line>
           <properties />
           <option name="timeStamp" value="327" />
         </line-breakpoint>
@@ -1697,22 +1878,52 @@
           <option name="timeStamp" value="332" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/GraphServlet.java</url>
-          <line>89</line>
+          <url>file://$PROJECT_DIR$/src/main/java/tau/cs/db/utils/JS.java</url>
+          <line>86</line>
           <properties />
-          <option name="timeStamp" value="419" />
+          <option name="timeStamp" value="453" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpSet.java</url>
-          <line>48</line>
+          <line>290</line>
           <properties />
-          <option name="timeStamp" value="429" />
+          <option name="timeStamp" value="456" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpSet.java</url>
+          <line>40</line>
+          <properties />
+          <option name="timeStamp" value="524" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpSet.java</url>
+          <line>60</line>
+          <properties />
+          <option name="timeStamp" value="544" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QBPHandler.java</url>
+          <line>150</line>
+          <properties />
+          <option name="timeStamp" value="563" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpLearner.java</url>
+          <line>148</line>
+          <properties />
+          <option name="timeStamp" value="566" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/DiffServlet.java</url>
+          <line>26</line>
+          <properties />
+          <option name="timeStamp" value="567" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="436" />
+      <option name="time" value="569" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
@@ -1727,6 +1938,8 @@
         <watch expression="dtype.getJavaClass().equals(java.math.BigInteger.class)" />
         <watch expression="model.createStatement(res,pr,l)" />
         <watch expression="l" />
+        <watch expression="match.getLeftSubject()" />
+        <watch expression="match" />
       </configuration>
     </watches-manager>
   </component>
@@ -1735,57 +1948,286 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/files/qs/examples/q6/weights/5/query1.sparql">
+    <entry file="file://$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QbpExplanationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="57" column="70" lean-forward="false" selection-start-line="57" selection-start-column="70" selection-end-line="57" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/21.0-rc1/guava-21.0-rc1.jar!/com/google/common/collect/Sets.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10754">
+          <caret line="755" column="0" lean-forward="false" selection-start-line="755" selection-start-column="0" selection-end-line="755" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Filterable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/TripleMergerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-399">
+          <caret line="6" column="35" lean-forward="false" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QbpLearnerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="26" column="46" lean-forward="false" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/function/Function.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/TreeMap.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="1772" column="22" lean-forward="false" selection-start-line="1772" selection-start-column="22" selection-end-line="1772" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Variable2Nodes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="25" column="41" lean-forward="false" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/createtests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/TripleMerger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-914">
+          <caret line="278" column="0" lean-forward="false" selection-start-line="278" selection-start-column="0" selection-end-line="278" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/test">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="31" column="31" lean-forward="false" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/utils/JS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-492">
+          <caret line="94" column="13" lean-forward="false" selection-start-line="94" selection-start-column="13" selection-end-line="94" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../sparqlbye/target/sparqlbye-0.1.0-SNAPSHOT.jar!/org/apache/jena/atlas/lib/Pair.class" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/GraphServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="855">
+          <caret line="63" column="7" lean-forward="false" selection-start-line="63" selection-start-column="7" selection-end-line="65" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configuration.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1080">
+          <caret line="25" column="27" lean-forward="false" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/utils/sparqlbyeLearner.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/REST/HelloWorld.java" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/jena/jena-core/3.1.1/jena-core-3.1.1.jar!/org/apache/jena/graph/Node.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpExplanation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/AbstractList.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="114" column="19" lean-forward="false" selection-start-line="114" selection-start-column="19" selection-end-line="114" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpQuerySuggestion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/ont/examples/query2/resultQueries/query1.sparql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QbpExplanationTest.java">
+    <entry file="file://$PROJECT_DIR$/files/ont/examples/query2/resultQueries/query2.sparql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/ont/examples/query2/resultQueries/query3.sparql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-57">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/ont/examples/query2/resultQueries/query4.sparql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/ont/examples/query2/resultQueries/query5.sparql" />
+    <entry file="file://$PROJECT_DIR$/files/ont/examples/query2/resultQueries/query6.sparql" />
+    <entry file="file://$PROJECT_DIR$/files/ont/examples/query2/resultQueries/query7.sparql" />
+    <entry file="file://$PROJECT_DIR$/files/ont/examples/query2/resultQueries/query8.sparql" />
+    <entry file="file://$PROJECT_DIR$/files/ont/examples/query2/resultQueries/query9.sparql" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/jena/jena-arq/3.1.1/jena-arq-3.1.1.jar!/org/apache/jena/sparql/core/Var.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="114" column="0" lean-forward="false" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/ont/examples/query2/build.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpBasicPattern.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="10" lean-forward="false" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpPattern.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="41" column="36" lean-forward="false" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1902#1903#0" expanded="false" />
+            <element signature="e#1933#1934#0" expanded="false" />
+            <element signature="e#2642#2643#0" expanded="false" />
+            <element signature="e#2696#2697#0" expanded="false" />
+            <element signature="e#3003#3004#0" expanded="false" />
+            <element signature="e#3033#3034#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7011">
+          <caret line="585" column="42" lean-forward="false" selection-start-line="585" selection-start-column="40" selection-end-line="585" selection-end-column="42" />
+          <folding>
+            <element signature="method#fillClassMap#0;class#utils#0" expanded="false" />
+            <element signature="method#varsCount#0;class#utils#0" expanded="false" />
+            <element signature="docComment;method#getRangeExpr#0;class#utils#0" expanded="false" />
+            <element signature="method#getRangeExpr#0;class#utils#0" expanded="false" />
+            <element signature="method#permute#0;class#utils#0" expanded="false" />
+            <element signature="method#isBgpIsomorphic#0;class#utils#0" expanded="false" />
+            <element signature="method#equiv#0;class#utils#0" expanded="false" />
+            <element signature="e#13462#13463#0" expanded="false" />
+            <element signature="e#13495#13496#0" expanded="false" />
+            <element signature="e#13523#13524#0" expanded="false" />
+            <element signature="e#13556#13557#0" expanded="false" />
+            <element signature="e#13593#13594#0" expanded="false" />
+            <element signature="e#13634#13635#0" expanded="false" />
+            <element signature="e#13669#13670#0" expanded="false" />
+            <element signature="e#13721#13722#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/ArrayList.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5453">
+          <caret line="321" column="0" lean-forward="false" selection-start-line="321" selection-start-column="0" selection-end-line="321" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/utils/QE.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QBPHandlerTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/utils/Experiment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="14" column="5" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        <state relative-caret-position="627">
+          <caret line="55" column="72" lean-forward="false" selection-start-line="55" selection-start-column="72" selection-end-line="55" selection-end-column="72" />
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/QbpLearnerTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+        <state relative-caret-position="1634">
+          <caret line="110" column="17" lean-forward="false" selection-start-line="85" selection-start-column="16" selection-end-line="110" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/utilsTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/SandboxServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tau/cs/db/qbp/TripleMergerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        <state relative-caret-position="456">
+          <caret line="37" column="65" lean-forward="false" selection-start-line="37" selection-start-column="65" selection-end-line="37" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
@@ -1795,380 +2237,85 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/FilterServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
-          <caret line="16" column="68" lean-forward="false" selection-start-line="16" selection-start-column="68" selection-end-line="16" selection-end-column="68" />
+          <caret line="16" column="83" lean-forward="false" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="83" />
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/SandboxServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/QueryServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/ArrayList.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5453">
-          <caret line="321" column="0" lean-forward="false" selection-start-line="321" selection-start-column="0" selection-end-line="321" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/GraphServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1805">
-          <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QBPHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="63" column="3" lean-forward="false" selection-start-line="63" selection-start-column="3" selection-end-line="63" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#11352#11353#0" expanded="false" />
-            <element signature="e#11385#11386#0" expanded="false" />
-            <element signature="e#11413#11414#0" expanded="false" />
-            <element signature="e#11446#11447#0" expanded="false" />
-            <element signature="e#11483#11484#0" expanded="false" />
-            <element signature="e#11524#11525#0" expanded="false" />
-            <element signature="e#11559#11560#0" expanded="false" />
-            <element signature="e#11611#11612#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/examples.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/results/2.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/results/3.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/ontology/dataset.ttl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1140">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/prov/ProvenanceGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="185" column="32" lean-forward="false" selection-start-line="185" selection-start-column="32" selection-end-line="185" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/explanations/query1e2/prov.ttl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Patternable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/explanations/query1e1/prov.ttl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="38" lean-forward="false" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/explanations/query1e3/prov.ttl">
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/qbpListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
-          <caret line="10" column="35" lean-forward="false" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+          <caret line="22" column="60" lean-forward="true" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/queries/query1.sparql">
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/List.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/Mergeable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="9" column="28" lean-forward="false" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpExplanation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/FilterablePatternDefault.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="47" lean-forward="false" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpPattern.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="66" column="59" lean-forward="false" selection-start-line="66" selection-start-column="59" selection-end-line="66" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/21.0-rc1/guava-21.0-rc1.jar!/com/google/common/collect/Sets.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="755" column="0" lean-forward="false" selection-start-line="755" selection-start-column="0" selection-end-line="755" selection-end-column="0" />
+        <state relative-caret-position="189">
+          <caret line="30" column="12" lean-forward="false" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpSet.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/QueryServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
-          <caret line="155" column="32" lean-forward="false" selection-start-line="155" selection-start-column="19" selection-end-line="155" selection-end-column="32" />
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/results/5.json">
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/prov/ProvenanceGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="374">
+          <caret line="314" column="0" lean-forward="false" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/results/4.json">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/resources/dataset.ttl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/results/1.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/weights/5/query5.sparql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/weights/5/query1.sparql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/weights/5/query2.sparql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="22" column="81" lean-forward="false" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="81" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/weights/5/query3.sparql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query2/weights/5/query3.sparql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-342">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query2/weights/5/query2.sparql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query2/weights/5/query1.sparql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-26">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query1/weights/5/query4.sparql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/ont/examples/query2 (copy)/weights/5/query3.sparql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/utils/NoExampleException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="31" lean-forward="false" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
+        <state relative-caret-position="173">
+          <caret line="136" column="29" lean-forward="false" selection-start-line="136" selection-start-column="25" selection-end-line="136" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QbpLearner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="142" column="0" lean-forward="false" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
+        <state relative-caret-position="391">
+          <caret line="241" column="0" lean-forward="false" selection-start-line="241" selection-start-column="0" selection-end-line="241" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/QBPHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="154" column="0" lean-forward="false" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3721#3730#0" expanded="true" />
+            <element signature="e#2906#2907#0" expanded="true" />
+            <element signature="e#2958#2959#0" expanded="true" />
+            <element signature="e#5260#5261#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/../sparqlbye/target/sparqlbye-0.1.0-SNAPSHOT.jar!/org/apache/jena/sparql/engine/QueryExecutionBase.class">
+    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/servlets/DiffServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="160" column="0" lean-forward="false" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/utils/Experiment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/utils/QE.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/qbp/TripleMerger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="389" column="24" lean-forward="false" selection-start-line="389" selection-start-column="24" selection-end-line="389" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/io/File.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="316" column="0" lean-forward="false" selection-start-line="316" selection-start-column="0" selection-end-line="316" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/utils/JS.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="574">
-          <caret line="153" column="9" lean-forward="false" selection-start-line="153" selection-start-column="9" selection-end-line="153" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tau/cs/db/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="110" column="7" lean-forward="false" selection-start-line="110" selection-start-column="7" selection-end-line="110" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/test">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="33" column="78" lean-forward="false" selection-start-line="33" selection-start-column="78" selection-end-line="33" selection-end-column="78" />
+        <state relative-caret-position="646">
+          <caret line="49" column="64" lean-forward="true" selection-start-line="49" selection-start-column="64" selection-end-line="49" selection-end-column="64" />
           <folding />
         </state>
       </provider>
@@ -2183,7 +2330,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.3572594" />
+                <option value="0.30298147" />
                 <option value="0.5" />
               </list>
             </option>
@@ -2196,7 +2343,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.3572594" />
+                <option value="0.30298147" />
               </list>
             </option>
           </splitter-proportions>
@@ -2204,10 +2351,11 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
+          <last-edited>Python 2.7.12 (/usr/bin/python2.7) interpreter library</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.3572594" />
+                <option value="0.49073327" />
               </list>
             </option>
           </splitter-proportions>
@@ -2219,7 +2367,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.3572594" />
+                <option value="0.49073327" />
               </list>
             </option>
           </splitter-proportions>
@@ -2227,11 +2375,12 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Python|SQBE</last-edited>
+          <last-edited>SQBE</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.3572594" />
+                <option value="0.49073327" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -2251,11 +2400,11 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>com.sun.jersey:jersey-bundle:1.8</last-edited>
+          <last-edited>Java EE 6-Java EE 6</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.3572594" />
+                <option value="0.49073327" />
               </list>
             </option>
           </splitter-proportions>

@@ -36,8 +36,8 @@ public class TripleMerger {
 
 //    List<TriplePath> l1;
 //    List<TriplePath> l2;
-    Filterable filteredPattern1;
-    Filterable filteredPattern2;
+    Patternable filteredPattern1;
+    Patternable filteredPattern2;
 
     class MergeSuggestion implements Comparable<MergeSuggestion>{
         Integer x;
@@ -85,7 +85,7 @@ public class TripleMerger {
                     flag=true;
             }
             if(t1.getPredicate().matches(t2.getPredicate())){
-                cost/=10000;
+                cost/=100000;
                 flag=true;
             }else{
                 float a = varsMerged.getOrDefault(new Pair<Node,Node>(t1.getPredicate(),t2.getPredicate()),1);
@@ -122,7 +122,7 @@ public class TripleMerger {
     ArrayList<MergeSuggestion> matching;
     PriorityQueue<MergeSuggestion> minimalQueue;
 
-    public TripleMerger(Filterable fp1, Filterable fp2) {
+    public TripleMerger(Patternable fp1, Patternable fp2) {
         this.filteredPattern1 = fp1;
         this.filteredPattern2 = fp2;
         this.mark1 = new Boolean[fp1.getPattern().size()];
@@ -180,6 +180,8 @@ public class TripleMerger {
         for (MergeSuggestion suggestion : this.matching){
             match.add(new MatchTriplePath(filteredPattern1.getPattern().get(suggestion.x)
                     ,filteredPattern2.getPattern().get(suggestion.y)));
+
+
         }
         return match;
 
@@ -267,23 +269,15 @@ public class TripleMerger {
      * @param matching
      * @return
      */
-    public Filterable createMergedPattern(List<MatchTriplePath> matching){
+    public Patternable createMergedPattern(List<MatchTriplePath> matching){
 
         ElementPathBlock result = new ElementPathBlock();
         Iterator<String> var_itr = (new Alphabet()).iterator();
-
-
-        ExprList exprsList = new ExprList();
-
         Variable2Nodes var1 = new Variable2Nodes();
         Variable2Nodes var2 = new Variable2Nodes();
-
-
-
         for(MatchTriplePath match : matching){
             Node sub = null;
             Node obj =null;
-
 
             //match subject if they match
             if(match.testSubjectMatches()) {
@@ -293,13 +287,11 @@ public class TripleMerger {
             //try to find variable that fits both
             else{
                 if(var1.containsKey(match.getLeftSubject()) && var2.containsKey(match.getRightSubject())){
-                    Set<String> var = var1.get(match.getLeftSubject());
-                    var.retainAll(var2.get(match.getRightSubject()));
+                    Set<String> var = Sets.intersection(var1.get(match.getLeftSubject()),var2.get(match.getRightSubject()));
                     if(var.size()>0){
                         sub = new Node_Variable(var.iterator().next());
                     }
                 }
-
             }
             //if no match so far, add new variable
             if(sub==null) {
@@ -312,8 +304,6 @@ public class TripleMerger {
                 Set<String> var2_set = var2.getOrDefault(match.getRightSubject(),new HashSet<String>());
                 var2_set.add(v);
                 var2.put(match.getRight().getSubject(),var2_set);
-
-
             }
 
             //match object
@@ -322,12 +312,8 @@ public class TripleMerger {
                 obj = match.getLeftObject();
             }
             else{
-
-
-
                 if(var1.containsKey(match.getLeft().getObject()) && var2.containsKey(match.getRight().getObject())){
-                    Set<String> var = var1.get(match.getLeft().getObject());
-                    var.retainAll(var2.get(match.getRight().getObject()));
+                    Set<String> var = Sets.intersection(var1.get(match.getLeft().getObject()),var2.get(match.getRight().getObject()));
                     if(var.size()>0){
                         obj = new Node_Variable(var.iterator().next());
                     }
@@ -344,60 +330,6 @@ public class TripleMerger {
                 Set<String> var2_set = var2.getOrDefault(match.getRight().getObject(),new HashSet<String>());
                 var2_set.add(v);
                 var2.put(match.getRight().getObject(),var2_set);
-
-
-
-                //add expression of range if datatypes matches
-                if(match.getLeftObject().isLiteral() && match.getRightObject().isLiteral()
-                        && match.getLeftObject().getLiteral().getDatatype().equals(match.getRightObject().getLiteral().getDatatype())){
-
-                    RDFDatatype dtype = match.getLeftObject().getLiteral().getDatatype();
-
-                    if(dtype.getJavaClass().equals(java.math.BigInteger.class)){
-                        int cmp = ((Integer)match.getLeftObject().getLiteral().getValue())
-                        .compareTo((Integer)match.getRightObject().getLiteral().getValue());
-                        if(cmp < 0){
-                            exprsList.add(new E_LessThanOrEqual(new ExprVar(obj),
-                                    new NodeValueInteger((new BigInteger(match.getRightObject().getLiteral().getValue().toString())),
-                                            match.getRightObject())));
-                            exprsList.add(new E_GreaterThanOrEqual(new ExprVar(obj),
-                                    new NodeValueInteger((new BigInteger(match.getLeftObject().getLiteral().getValue().toString())),
-                                            match.getLeftObject())));
-
-                        }else{
-                            exprsList.add(new E_LessThanOrEqual(new ExprVar(obj),
-                                    new NodeValueInteger((new BigInteger(match.getLeftObject().getLiteral().getValue().toString())),
-                                            match.getLeftObject())));
-                            exprsList.add(new E_GreaterThanOrEqual(new ExprVar(obj),
-                                    new NodeValueInteger((new BigInteger(match.getRightObject().getLiteral().getValue().toString())),
-                                            match.getRightObject())));
-
-                        }
-                    }
-
-                    if(dtype instanceof AbstractDateTime){
-                        int cmp = ((AbstractDateTime)match.getLeftObject().getLiteral().getValue())
-                                .compare((AbstractDateTime)match.getRightObject().getLiteral().getValue());
-                        if(cmp == AbstractDateTime.LESS_THAN){
-                            exprsList.add(new E_LessThanOrEqual(new ExprVar(sub),
-                                    new NodeValueDT(match.getRightObject().getLiteral().getValue().toString(),
-                                            match.getRightObject())));
-                            exprsList.add(new E_GreaterThanOrEqual(new ExprVar(sub),
-                                    new NodeValueDT(match.getLeftObject().getLiteral().getValue().toString(),
-                                            match.getLeftObject())));
-
-                        }else{
-                            exprsList.add(new E_LessThanOrEqual(new ExprVar(sub),
-                                    new NodeValueDT(match.getLeftObject().getLiteral().getValue().toString(),
-                                            match.getLeftObject())));
-                            exprsList.add(new E_GreaterThanOrEqual(new ExprVar(sub),
-                                    new NodeValueDT(match.getRightObject().getLiteral().getValue().toString(),
-                                            match.getRightObject())));
-
-                        }
-                    }
-
-                }
 
             }
             if(match.getLeft().isTriple() && match.getRight().isTriple()) {
@@ -434,88 +366,13 @@ public class TripleMerger {
 
 
         }
-        for(Expr expr1 : this.filteredPattern1.getExpList()){
-            if(expr1 instanceof E_NotEquals) {
-                Node vl1 = ((E_NotEquals) expr1).getArg1().getConstant().asNode();
-                Node vr1 = ((E_NotEquals) expr1).getArg2().getConstant().asNode();
-
-                Set<String> strSetl1 = var1.get(vl1);
-                Set<String> strSetr1 = var1.get(vr1);
-
-                for (Expr expr2 : this.filteredPattern2.getExpList()) {
-                    if (expr2 instanceof E_NotEquals) {
-                        Node vl2 = ((E_NotEquals) expr2).getArg1().getConstant().asNode();
-                        Node vr2 = ((E_NotEquals) expr2).getArg2().getConstant().asNode();
-
-                        Set<String> strSetl2 = var2.get(vl2);
-                        Set<String> strSetr2 = var2.get(vr2);
-
-                        if (strSetl1 == null) {
-
-                            //found an expression matching in first arg
-                            if (vl1.matches(vl2)) {
-
-                                if (strSetr1 == null) {
-                                    if (vr1.matches(vr2)) {
-                                        exprsList.add(expr1);
-                                        break;
-                                    }
-                                } else {
-                                    if (strSetr2 == null) {
-                                        continue;
-                                    }
-                                    Set<String> iset2 = Sets.intersection(strSetr1, strSetr2);
-                                    if (iset2.size() > 0) {
-                                        Expr temp = new E_NotEquals(new NodeValueNode(vl1),
-                                                new NodeValueNode(new Node_Variable
-                                                        (iset2.iterator().next())));
-                                        exprsList.add(temp);
-                                        break;
-                                    }
-                                }
-
-                            }
-                            } else {
-                                if (strSetl2 == null) {
-                                    continue;
-                                }
-                                Set<String> iset1 = Sets.intersection(strSetl1, strSetl2);
-                                if (iset1.size() > 0) {
-                                    if (strSetr1 == null) {
-                                        if (vr1.matches(vr2)) {
-                                            Expr temp = new E_NotEquals(new NodeValueNode(new Node_Variable
-                                                    (iset1.iterator().next())), new NodeValueNode(vr1));
-                                            exprsList.add(temp);
-                                            break;
-                                        }
-                                    } else {
-                                        if (strSetr2 == null) {
-                                            continue;
-                                        }
-                                        Set<String> iset2 = Sets.intersection(strSetr1, strSetr2);
-                                        if (iset2.size() > 0) {
-                                            Expr temp = new E_NotEquals(new NodeValueNode(new Node_Variable
-                                                    (iset1.iterator().next())), new NodeValueNode(new Node_Variable
-                                                    (iset2.iterator().next())));
-                                            exprsList.add(temp);
-                                            break;
-                                        }
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                }
 
 
-        }
-
-        return new FilterablePatternDefault(result.getPattern().getList(),exprsList);
+        return new PatternableDefault(result.getPattern().getList());
     }
 
 
-    private static int PatternCost(Filterable epb){
+    private static int PatternCost(Patternable epb){
         int cost = utils.varsCount(epb);
         for(TriplePath tp : epb.getPattern()){
             if(!tp.isTriple()){
@@ -525,7 +382,7 @@ public class TripleMerger {
         return cost;
     }
 
-    public Filterable merge(){
+    public Patternable merge(){
         Logger logger = LoggerFactory.getLogger(TripleMerger.class);
 
 //        logger.info(String.format("Merge %s with %s",this.filteredPattern1.toString(),filteredPattern2.toString() ));
@@ -533,7 +390,7 @@ public class TripleMerger {
 
         int l =this.minimalQueue.size();
 
-        Filterable minMatching = null;
+        Patternable minMatching = null;
         float pattCost = 1000;
         for (int i=0; i<Math.max(l-5,2);i++){
             fillSuggestion();
@@ -545,7 +402,7 @@ public class TripleMerger {
 
             List<MatchTriplePath> matching = mergeHandler();
 //            logger.info(String.format("matching: %s", matching.toString()));
-            Filterable p = createMergedPattern(matching);
+            Patternable p = createMergedPattern(matching);
 //            logger.info(String.format("pattern: %s",p.toString()));
 //            logger.info("****************");
             if(p!=null && utils.testBasicPatten(p)){

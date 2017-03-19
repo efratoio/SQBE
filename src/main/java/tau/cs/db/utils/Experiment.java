@@ -5,6 +5,7 @@ import org.apache.jena.graph.Node;
 import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.QuerySolutionMap;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.RDFNode;
@@ -48,7 +49,15 @@ public class Experiment {
         return kResults.getLeft().size();
 
     }
+    public static boolean CheckDiffExample(String ontName,String queryName, RDFNode example, Model model) throws IOException {
 
+        QuerySolutionMap binding = new QuerySolutionMap();
+        binding.add("example",example);
+        Query query = QE.TestQueryFromFile(ontName,queryName,queryName);
+        Query askQuery = ProvenanceGenerator.CreatAskQuery(query,binding);
+        return ProvenanceGenerator.ExecuteAskQuery(askQuery,model,binding);
+
+    }
 
     public static boolean CheckExample(String ontName,String queryName, String testQuery, int exampleNum, Model model) throws IOException {
         Query query = QE.TestQueryFromFile(ontName,queryName,testQuery);

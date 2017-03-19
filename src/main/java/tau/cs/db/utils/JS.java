@@ -80,7 +80,13 @@ public class JS {
         File file=  new File(filePath);
         file.createNewFile();
         InputStream in = new FileInputStream(file);
-        return ResultSetFactory.fromJSON(in);
+        ResultSet rs = null;
+        try {
+            rs = ResultSetFactory.fromJSON(in);
+        }catch(Exception ex){
+            throw ex;
+        }
+        return rs;
     }
     public static void formatJsonToResultSet(String ontName,String queryName){
         String jsonFile = String.format(examplesPath,ontName, queryName);

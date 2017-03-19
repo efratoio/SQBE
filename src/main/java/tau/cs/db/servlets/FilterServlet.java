@@ -14,7 +14,7 @@ import java.io.IOException;
 @WebFilter(
         filterName="FilterServlet",
         urlPatterns={"/*"},
-        servletNames={"SandboxServlet", "GraphServlet","QueryServlet"}
+        servletNames={"SandboxServlet", "GraphServlet","QueryServlet","DiffServlet"}
 )
 public class FilterServlet implements Filter {
 

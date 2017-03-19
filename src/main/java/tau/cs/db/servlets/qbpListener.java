@@ -8,15 +8,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import javax.servlet.http.HttpSessionAttributeListener;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
-import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.*;
 
 @WebListener()
 public class qbpListener implements ServletContextListener,
         HttpSessionListener, HttpSessionAttributeListener {
-
+    String fullPath;
     // Public constructor is required by servlet spec
     public qbpListener() {
     }
@@ -25,10 +22,11 @@ public class qbpListener implements ServletContextListener,
     // ServletContextListener implementation
     // -------------------------------------------------------
     public void contextInitialized(ServletContextEvent sce) {
+
         ServletContext context = sce.getServletContext();
-        String fullPath = context.getRealPath("/WEB-INF/resources/dataset.ttl");
-        QBPHandler qbpHandler = new QBPHandler(fullPath);
-        context.setAttribute("qbpHandler",qbpHandler);
+        fullPath = context.getRealPath("/WEB-INF/resources/dataset.ttl");
+//        QBPHandler qbpHandler = new QBPHandler(fullPath);
+//        context.setAttribute("qbpHandler",qbpHandler);
     }
 
     public void contextDestroyed(ServletContextEvent sce) {
@@ -42,7 +40,9 @@ public class qbpListener implements ServletContextListener,
     // HttpSessionListener implementation
     // -------------------------------------------------------
     public void sessionCreated(HttpSessionEvent se) {
-      /* Session is created. */
+        HttpSession context = se.getSession();
+        QBPHandler qbpHandler = new QBPHandler(fullPath);
+        context.setAttribute("qbpHandler",qbpHandler);
     }
 
     public void sessionDestroyed(HttpSessionEvent se) {

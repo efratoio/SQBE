@@ -3,15 +3,19 @@ package tau.cs.db.qbp;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.common.primitives.Floats;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.atlas.lib.Pair;
 import org.apache.jena.query.Query;
+import org.apache.jena.rdf.model.Model;
 import org.apache.jena.sparql.algebra.Op;
 import org.apache.jena.sparql.algebra.OpAsQuery;
 import org.apache.jena.sparql.algebra.op.OpProject;
 import org.apache.jena.sparql.algebra.op.OpUnion;
 import org.apache.jena.sparql.core.Var;
+import org.apache.log4j.Logger;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by efrat on 12/12/16.
@@ -28,13 +32,15 @@ public class QbpLearner {
     };
     Map<Set<Integer>,QbpSet> mergeSuggMap;
     List<QbpSet> basicPatterns;
-    public QbpLearner(List<? extends QbpBasicExplanation> explanations) throws InvalidPropertiesFormatException {
+    Model model;
+    public QbpLearner(List<? extends QbpBasicExplanation> explanations,Model model) throws InvalidPropertiesFormatException {
         this.basicPatterns = new ArrayList<>();
         for(QbpBasicExplanation exp: explanations){
-            this.basicPatterns.add(new QbpSet(new QbpPattern(new QbpPattern(exp))
+            this.basicPatterns.add(new QbpSet(new QbpPattern(new QbpPattern(exp.getPattern()).getPattern())
                     ,Arrays.asList(exp)));
         }
         this.mergeSuggMap = new HashMap<>();
+        this.model = model;
         this.InitSuggestions();
     }
 
@@ -60,14 +66,14 @@ public class QbpLearner {
 
 
 
-    public static Query CreateQuery(List<Pair<QbpSet,Set<Integer>>> lst){
+    public static Query CreateQuery(List<Pair<QbpSet,Set<Integer>>> lst,Model model){
         Op opQuery =null;
         for(Pair<QbpSet,Set<Integer>> patt : lst){
             if(opQuery == null){
-                opQuery = utils.queryBuilder(patt.getLeft());
+                opQuery = utils.queryBuilder(patt.getLeft(),model);
             }
             else{
-                Op op = utils.queryBuilder(patt.getLeft());
+                Op op = utils.queryBuilder(patt.getLeft(),model);
                 opQuery = OpUnion.create(opQuery,op);
             }
         }
@@ -77,55 +83,89 @@ public class QbpLearner {
 
     }
 
-    public static Collection<QbpQuerySuggestion> GetKQueries(NavigableSet<QbpQuerySuggestion> qbpSetSuggestion,int k,
-                                                 QbpLearner learner) throws InvalidPropertiesFormatException {
+    public static Collection<QbpQuerySuggestion> GetKQueries(List<QbpQuerySuggestion> accuQuerySuggestion, int k,
+                                                             QbpLearner learner) throws InvalidPropertiesFormatException {
+//        Logger logger = Logger.getLogger("QueryBuilder");
 
+        NavigableSet<QbpQuerySuggestion> newQuerySuggestion  = new TreeSet<>(cmp);
+        for(QbpQuerySuggestion existingQuery: accuQuerySuggestion){
+//            logger.info("new loop");
+//            logger.info(String.format("merged: cost: %f %s",computeCost(existingQuery),
+//                    existingQuery.stream()
+//                            .map(x->x.getRight().stream().map(y->y.toString()+",").reduce("(",(a,b)->a+b)+")")
+//                            .reduce(String::concat)));
+            PriorityQueue<Pair<QbpSet,Set<Integer>>> mergeSuggestionQueue = CreateSuggestion(existingQuery,learner);
+            for(int i=0; i<k;i++)
+            if(mergeSuggestionQueue.size()>0) {
+                List<QbpQuerySuggestion> queries4MergeSuggestion = new ArrayList<>();
+                Pair<QbpSet, Set<Integer>> mergeSuggestion = mergeSuggestionQueue.poll();
+                QbpQuerySuggestion suggestion = new QbpQuerySuggestion();
+                suggestion.add(mergeSuggestion);
+                queries4MergeSuggestion.add(suggestion);
+//                logger.info(String.format("Merge suggestion %s",mergeSuggestion.getRight().stream().map(x->x.toString()+",").reduce("(",(a,b)->a+b)+")"));
+                for (Pair<QbpSet, Set<Integer>> queryPart : existingQuery) {
+                    if (!mergeSuggestion.getRight().containsAll(queryPart.getRight())) {
+                        if(mergeSuggestion.getLeft().checkAddToSet(queryPart.getLeft())){
 
-        NavigableSet<QbpQuerySuggestion> newSuggestions  = new TreeSet<>(cmp);
-        for(QbpQuerySuggestion qbpSetList: qbpSetSuggestion){
-            PriorityQueue<Pair<QbpSet,Set<Integer>>> queue = CreateSuggestion(qbpSetList,learner);
-            for(int i=0;i<k;i++ ){
-                if(queue.size()>0) {
-                    QbpQuerySuggestion sug = new QbpQuerySuggestion();
-
-                    Pair<QbpSet, Set<Integer>> mergeSugg = queue.poll();
-                    for (Pair<QbpSet, Set<Integer>> pair : qbpSetList) {
-
-
-                        if (!mergeSugg.getRight().containsAll(pair.getRight())) {
-                            if(mergeSugg.getLeft().checkAddToSet(pair.getLeft())){
-                                mergeSugg.getLeft().addToSet(pair.getLeft());
-                                List<Integer> newList = new LinkedList<Integer>();
-                                mergeSugg = new Pair<>(mergeSugg.getLeft(), Sets.union(mergeSugg.getRight(),
-                                        pair.getRight()));
-
+//                            logger.info(String.format("merge suggestion %s add to set %s",
+//                                    mergeSuggestion.getRight().stream().map(y->y.toString()+",").reduce("",(a,b)->a+b),
+//                                    queryPart.getRight().stream().map(y->y.toString()+",").reduce("",(a,b)->a+b)));
+                            Collection<QbpQuerySuggestion> tempAdd = new ArrayList<>();
+                            for(QbpQuerySuggestion sug: queries4MergeSuggestion) {
+                                QbpQuerySuggestion temp = new QbpQuerySuggestion(sug);
+                                QbpSet tempSet = temp.get(0).getLeft();
+                                tempSet.addToSet(queryPart.getLeft());
+                                Set<Integer> tempInt = Sets.union(temp.get(0).getRight(), queryPart.getRight());
+                                temp.remove(0);
+                                temp.add(0,new Pair<QbpSet,Set<Integer>>(tempSet,tempInt));
+//                                temp.add(new Pair<QbpSet, Set<Integer>>(tempSet, Sets.union(mergeSuggestion.getRight(), queryPart.getRight())));
+                                sug.add(queryPart);
+                                tempAdd.add(temp);
 
                             }
-                            else {
-                                sug.add(pair);
-                            }
-
+//                            tempAdd.forEach(z-> logger.info(String.format("adding: %s",
+//                                            z.stream().map(x->x.getRight().stream().map(y->y.toString()+",")
+//                                                    .reduce("(",(a,b)->a+b)+")")
+//                                            .reduce(String::concat))));
+                            queries4MergeSuggestion.addAll(tempAdd);
+                        }else {
+                            for(QbpQuerySuggestion sug: queries4MergeSuggestion)
+                                sug.add(queryPart);
                         }
                     }
-
-                    sug.add(mergeSugg);
-                    newSuggestions.add(sug);
-
                 }
+                newQuerySuggestion.addAll(queries4MergeSuggestion);
             }
         }
-//        qbpSetSuggestion.sort(cmp);
-//        newSuggestions.sort(cmp);
-        if(newSuggestions.size() ==0 || qbpSetSuggestion.containsAll(newSuggestions) || computeCost(newSuggestions.first())>=
-                computeCost(Iterables.get(qbpSetSuggestion,Integer.min(k-1,qbpSetSuggestion.size()-1)))){
-             return  qbpSetSuggestion.headSet(Iterables.get(qbpSetSuggestion,Integer.min(k,qbpSetSuggestion.size()-1)));
+        if(newQuerySuggestion.size() ==0 || accuQuerySuggestion.containsAll(newQuerySuggestion)){
+            return  accuQuerySuggestion.subList(0, Math.min(k,accuQuerySuggestion.size()));
         }
-        qbpSetSuggestion.addAll(newSuggestions);
-
-        return GetKQueries(qbpSetSuggestion.headSet(Iterables.get(qbpSetSuggestion,Integer.min(k,qbpSetSuggestion.size()-1)),true),k,learner);
-
-
-
+        for(QbpQuerySuggestion qqs: newQuerySuggestion){
+//            logger.info(String.format("\t\tnew queries: cost: %f %s",computeCost(qqs),
+//                    qqs.stream()
+//                            .map(x->x.getRight().stream().map(y->y.toString()+",").reduce("(",(a,b)->a+b)+")")
+//                            .reduce(String::concat)));
+        }
+        newQuerySuggestion.addAll(accuQuerySuggestion);
+//        List<QbpQuerySuggestion> res = new ArrayList<>();
+//        for(int i=0; i<k;i++){
+//            if(accuQuerySuggestion.size()>0) {
+//                if(newQuerySuggestion.size()>0) {
+//                    if (cmp.compare(accuQuerySuggestion.get(0), newQuerySuggestion.first()) > 0) {
+//                        res.add(newQuerySuggestion.pollFirst());
+//                    } else {
+//                        res.add(accuQuerySuggestion.remove(0));
+//                    }
+//                }else{
+//                    res.addAll(accuQuerySuggestion);
+//                }
+//            }else{
+//                if(newQuerySuggestion.size()>0){
+//                    res.add(newQuerySuggestion.pollFirst());
+//                }
+//            }
+//        }
+        return GetKQueries(newQuerySuggestion.stream().collect(Collectors.toList()).subList(0,Math.min(k,newQuerySuggestion.size())), k,learner);
     }
     public static PriorityQueue<Pair<QbpSet,Set<Integer>>> CreateSuggestion(QbpQuerySuggestion qbpSet,
             QbpLearner learner)    throws InvalidPropertiesFormatException {
@@ -171,31 +211,34 @@ public class QbpLearner {
         re.add(j);
         return re;
     }
-    public static List<Query> LearnQuery(List<? extends  QbpBasicExplanation> explanations, int k) throws InvalidPropertiesFormatException {
-        QbpLearner learner = new QbpLearner(explanations);
+    public static List<Query> LearnQuery(List<? extends  QbpBasicExplanation> explanations, int k,Model model) throws InvalidPropertiesFormatException {
+//        Logger logger = Logger.getLogger("QueryBuilder");
+//        logger.info("Examples:");
+        QbpLearner learner = new QbpLearner(explanations,model);
 
         QbpQuerySuggestion qbpSetList = new QbpQuerySuggestion();
             for(int i=0;i< explanations.size();i++){
-                qbpSetList.add(new Pair(new QbpSet(new QbpPattern(explanations.get(i))
+//                logger.info(String.format("%d explanation %s",i,explanations.get(i).getExample().getLiteral()));
+                qbpSetList.add(new Pair(new QbpSet(new QbpPattern(explanations.get(i).getPattern())
                         ,Arrays.asList(explanations.get(i))), CreateSetInt(i)));
             }
 
         PriorityQueue<Pair<QbpSet,Set<Integer>>> queue = CreateSuggestion(qbpSetList,learner);
-        NavigableSet<QbpQuerySuggestion> lll = new TreeSet<>(cmp);
+        List<QbpQuerySuggestion> lll = new ArrayList<>();
         lll.add(qbpSetList);
 
         Collection<QbpQuerySuggestion> KSuggestions = GetKQueries(lll,k,learner);
-
+//        logger.info("results:");
+        for(QbpQuerySuggestion q: KSuggestions){
+//            logger.info(String.format("Result: cost: %f %s",computeCost(q),
+//                    q.stream()
+//                            .map(x->x.getRight().stream().map(y->y.toString()+",").reduce("(",(a,b)->a+b)+")")
+//                            .reduce(String::concat)));
+        }
         List<Query> kQueries = new ArrayList<>();
         for(QbpQuerySuggestion qbpS: KSuggestions){
-            kQueries.add(CreateQuery(qbpS));
+            kQueries.add(CreateQuery(qbpS, learner.model));
         }
         return kQueries;
-
-
     }
-
-
-
-
 }

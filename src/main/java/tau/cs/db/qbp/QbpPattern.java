@@ -8,6 +8,7 @@ import org.apache.jena.sparql.expr.ExprList;
 import org.apache.jena.sparql.syntax.ElementPathBlock;
 import tau.cs.db.utils.RDF;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,13 +16,13 @@ import java.util.List;
  */
 public class QbpPattern implements  QbpBasicPattern{
 
-    Filterable filterPattern;
+    Patternable filterPattern;
     Float IR;
     Op op;
-    ExprList exprList;
-    public QbpPattern(List<TriplePath> tpList, ExprList exprList) {
+//    ExprList exprList;
+    public QbpPattern(List<TriplePath> tpList) {
 
-        Filterable fb = new FilterablePatternDefault(tpList,exprList);
+        Patternable fb = new PatternableDefault(tpList);
         this.filterPattern = fb;
         int varsNum = 0;
         int pp = 0;
@@ -84,24 +85,24 @@ public class QbpPattern implements  QbpBasicPattern{
 //    }
 
     @Override
-    public QbpBasicPattern merge(Filterable t) {
-        TripleMerger tm = new TripleMerger(this.filterPattern,t);
-        Filterable patt = tm.merge();
+    public QbpBasicPattern merge(Patternable t) {
+        TripleMerger tm = new TripleMerger(this,t);
+        Patternable patt = tm.merge();
         if(patt == null){
             return null;
         }
-        return new QbpPattern(patt);
+        return new QbpPattern(patt.getPattern());
     }
 
     @Override
     public List<TriplePath> getPattern() {
         return this.filterPattern.getPattern();
     }
-
-    @Override
-    public ExprList getExpList() {
-        return this.filterPattern.getExpList();
-    }
+//
+//    @Override
+//    public ExprList getExpList() {
+//        return this.filterPattern.getExpList();
+//    }
 
 
     public boolean isomorphicTo(QbpBasicPattern qbpPattern) {
@@ -111,5 +112,14 @@ public class QbpPattern implements  QbpBasicPattern{
     @Override
     public Float getIR() {
         return this.IR;
+    }
+
+    @Override
+    public QbpBasicPattern clone() {
+        List<TriplePath> tpList = new ArrayList<>();
+        for(TriplePath tp: this.getPattern()){
+            tpList.add(tp);
+        }
+        return new QbpPattern(tpList);
     }
 }

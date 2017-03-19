@@ -1,0 +1,157 @@
+@prefix swrc:  <http://swrc.ontoware.org/ontology#> .
+@prefix bench: <http://localhost/vocabulary/bench/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix persons: <http://localhost/persons/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://localhost/publications/inprocs/Proceeding1/1951/Inproceeding7>
+        a           bench:Inproceedings ;
+        dc:creator  <http://localhost/persons/Gayle_Wingrove> ;
+	dc:date	"2000-07-07"^^xsd:date .
+
+<http://localhost/publications/articles/Journal1/1950/Article29>
+        a           bench:Article ;
+        dc:creator  <http://localhost/persons/Gayle_Wingrove> ;
+	dc:date	"2000-01-07"^^xsd:date .
+
+<http://localhost/persons/Gayle_Wingrove>
+        foaf:name  "Gayle Wingrove"^^xsd:string ;
+	foaf:level "2"^^xsd:integer ;
+	a swrc:Person .
+
+
+<http://localhost/persons/Shabat_Shalom>
+        foaf:name  "Shabat Shalom"^^xsd:string ;
+	foaf:level "4"^^xsd:integer ;
+	a swrc:Person .
+
+<http://localhost/persons/Rosh_Hashana>
+        foaf:name  "Rosh Hashana"^^xsd:string ;
+	foaf:level "4"^^xsd:integer ;
+	a swrc:Person .
+
+<http://localhost/publications/inprocs/Proceeding1/1951/Inproceeding8>
+        a           bench:Inproceedings ;
+        dc:creator  <http://localhost/persons/Dave_Shlomsky> ;
+	dc:date	"2001-07-07"^^xsd:date .
+
+<http://localhost/publications/articles/Journal1/1950/Article30>
+        a           bench:Article ;
+        dc:creator  <http://localhost/persons/Dave_Shlomsky> ;
+	dc:creator  <http://localhost/persons/Shabat_Shalom> ;
+	dc:date	"2002-07-07"^^xsd:date .
+
+<http://localhost/persons/Dave_Shlomsky>
+        foaf:name  "Dave Shlomsky"^^xsd:string ;
+	foaf:level "3"^^xsd:integer ;
+	a swrc:Person .
+
+
+<http://localhost/publications/inprocs/Proceeding1/1951/Inproceeding12>
+        a           bench:Inproceedings ;
+        dc:creator  <http://localhost/persons/Oded_Chaim> ;
+	dc:creator  <http://localhost/persons/Rosh_Hashana> ;
+	dc:date	"2003-07-07"^^xsd:date .
+
+<http://localhost/publications/articles/Journal1/1950/Article35>
+        a           bench:Article ;
+        dc:creator  <http://localhost/persons/Oded_Chaim> ;
+	dc:creator  <http://localhost/persons/Golda_Meir> ;
+	dc:date	"2004-07-07"^^xsd:date .
+
+<http://localhost/persons/Oded_Chaim>
+        foaf:name  "Oded Chaim"^^xsd:string ;
+	foaf:level "3"^^xsd:integer ;
+	a swrc:Person .
+
+<http://localhost/publications/inprocs/Proceeding1/1951/Inproceeding9>
+        a           bench:Inproceedings ;
+        dc:creator  <http://localhost/persons/Bret_Zun> ;
+	dc:date	"2003-07-07"^^xsd:date .
+
+<http://localhost/publications/articles/Journal1/1950/Article31>
+        a           bench:Article ;
+        dc:creator  <http://localhost/persons/Bret_Zun> ;
+	dc:date	"2006-07-07"^^xsd:date .
+
+<http://localhost/persons/Bret_Zun>
+        foaf:name  "Bret Zun"^^xsd:string ;
+	foaf:level "3"^^xsd:integer ;
+	a swrc:Person .
+
+
+<http://localhost/publications/articles/Journal1/1950/Article32>
+        a           bench:Article ;
+        dc:creator  <http://localhost/persons/Bret_Zun> ;
+	dc:creator  <http://localhost/persons/Mami_Lod> ;
+	dc:date	"2007-07-07"^^xsd:date .
+
+<http://localhost/persons/Mami_Lod>
+        foaf:name  "Mami Lod"^^xsd:string ;
+	foaf:level "2"^^xsd:integer ;
+	a swrc:Person .
+
+
+
+<http://localhost/publications/inprocs/Proceeding1/1951/Inproceeding10>
+        a           bench:Inproceedings ;
+        dc:creator  <http://localhost/persons/Dave_Shlomsky> ;
+	dc:creator  <http://localhost/persons/Golda_Meir> ;
+	dc:date	"2003-02-07"^^xsd:date .
+
+
+
+<http://localhost/persons/Davis_Reed>
+        foaf:name  "Davis Reed"^^xsd:string ;
+	foaf:level "3"^^xsd:integer ;
+	a swrc:Person .
+
+<http://localhost/persons/Golda_Meir>
+        foaf:name  "Golda Meir"^^xsd:string ;
+	foaf:level "2"^^xsd:integer ;
+	a swrc:Person .
+
+<http://localhost/publications/articles/Journal1/1950/Article36>
+        a           bench:Article ;
+        dc:creator  <http://localhost/persons/Gayle_Wingrove> ;
+	dc:creator  <http://localhost/persons/Bret_Zun> ;
+	dc:date	"2000-07-07"^^xsd:date .
+
+<http://localhost/publications/articles/Journal1/1950/Article37>
+        a           bench:Article ;
+        dc:creator  <http://localhost/persons/Davis_Reed> ;
+	dc:creator  <http://localhost/persons/Bret_Zun> ;
+	dc:date	"2008-07-07"^^xsd:date .
+
+<http://localhost/publications/articles/Journal1/1950/Article33>
+        a           bench:Article ;
+        dc:creator  <http://localhost/persons/Gayle_Wingrove> ;
+	dc:creator  <http://localhost/persons/Paul_Erdoes> ;
+	dc:date	"2009-07-07"^^xsd:date .
+
+<http://localhost/persons/Paul_Erdoes>
+        foaf:name  "Paul Erdoes"^^xsd:string ;
+	foaf:level "1"^^xsd:integer ;
+	a swrc:Person . 
+
+
+<http://localhost/publications/articles/Journal1/1950/Article34>
+        a           bench:Article ;
+        dc:creator  <http://localhost/persons/Paul_Erdoes> ;
+	dc:creator  <http://localhost/persons/Mami_Lod> ;
+	dc:date	"2010-07-07"^^xsd:date .
+
+
+<http://localhost/publications/inprocs/Proceeding1/1951/Inproceeding11>
+        a           bench:Inproceedings ;
+        dc:creator  <http://localhost/persons/Paul_Erdoes> ;
+	dc:creator  <http://localhost/persons/Golda_Meir> ;
+	dc:date	"2009-07-07"^^xsd:date .
+
+
+
+

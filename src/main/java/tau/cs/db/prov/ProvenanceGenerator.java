@@ -1,5 +1,6 @@
 package tau.cs.db.prov;
 
+import org.apache.jena.atlas.lib.Pair;
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Triple;
 import org.apache.jena.query.*;
@@ -9,6 +10,7 @@ import org.apache.jena.sparql.algebra.Op;
 import org.apache.jena.sparql.algebra.op.*;
 import org.apache.jena.sparql.core.TriplePath;
 import org.apache.jena.sparql.core.Var;
+import org.apache.jena.sparql.engine.QueryIterator;
 import org.apache.jena.sparql.engine.binding.Binding;
 import org.apache.jena.sparql.engine.binding.BindingBase;
 import org.apache.jena.sparql.engine.binding.BindingFactory;
@@ -117,6 +119,7 @@ public class ProvenanceGenerator {
         Iterator<Var> varIt = binding.vars();
         while(varIt.hasNext()) {
             vars.add(varIt.next());
+
         }
         List<Binding> bindings = new ArrayList<Binding>();
         bindings.add(binding);
@@ -155,7 +158,7 @@ public class ProvenanceGenerator {
         return new Triple(sub,predicate,obj);
     }
 
-    public static void GetProv(Op alg, Binding bind, OpBGP result) throws Exception {
+    public static OpBGP GetProv(Op alg, Binding bind, OpBGP result) throws Exception {
         if(alg instanceof  Op1) {
 
             Binding newBind = BindingFactory.binding(bind);
@@ -180,15 +183,24 @@ public class ProvenanceGenerator {
                     }
                 }
             }
-            GetProv(((Op1) alg).getSubOp(),newBind,result);
-            return;
+            OpBGP res = GetProv(((Op1) alg).getSubOp(),newBind,result);
+            return res;
         }
-        if(alg instanceof Op2) {
-            GetProv(((Op2)alg).getLeft(),bind,result);
-            GetProv(((Op2)alg).getRight(),bind,result);
-            return;
+        if(alg instanceof OpUnion ) {
+            OpBGP copyRes = (OpBGP)result.copy();
+            OpBGP res1 = GetProv(((Op2)alg).getLeft(),bind,copyRes);
+            if(res1!=null)
+                return res1;
+            OpBGP res2 = GetProv(((Op2)alg).getRight(),bind,result);
+            return res2;
         }
 
+        if(alg instanceof Op2 ) {
+
+            GetProv(((Op2)alg).getLeft(),bind,result);
+            OpBGP res2 = GetProv(((Op2)alg).getRight(),bind,result);
+            return res2;
+        }
         if(alg instanceof Op0){
 
             if(alg instanceof OpBGP) {
@@ -196,16 +208,19 @@ public class ProvenanceGenerator {
                     Triple newT = GetBinded(t,bind);
                     if(newT!=null){
                         result.getPattern().add(newT);
+                    }else{
+                        return null;
                     }
                 }
-                return;
+                return result;
             }
             if(alg instanceof OpTable ){
-                return;
+                return result;
             }
             throw new Exception("Op algebra unknown");
         }
         assert false;
+        return null;
     }
 
 
@@ -247,49 +262,7 @@ public class ProvenanceGenerator {
             Op op = Algebra.compile(provQuery);
             GetProv(op,sln,res);
 
-//            Iterator<String> itr = sln.varNames();
-//            for(;itr.hasNext();)
-//            {
-//
-//                String varName = itr.next();
-//                RDFNode node = sln.get(varName);
-//                if(node.isResource()){
-//                    pss.setIri(varName,sln.getResource(varName).toString());}
-//                if(node.isLiteral()){
-//                    pss.setLiteral(varName,sln.getLiteral(varName));
-//                }
-//            }
-
-
         }
-
-//
-//
-//        String stringModel = pss.toString();
-//
-//
-//        //get all parameters
-//        String pattern  = "\\{(.*?)FILTER";
-//        Pattern r = Pattern.compile(pattern,Pattern.DOTALL);
-//        Matcher m = r.matcher(stringModel);
-//        if(m.find()) {
-//            stringModel = m.group(1);
-//        }
-//
-//        pattern  = "\\{(.*?)\\}";
-//        r = Pattern.compile(pattern,Pattern.DOTALL);
-//        m = r.matcher(stringModel);
-//        if(m.find()) {
-//            stringModel = m.group(1);
-//        }
-//
-//
-//        String stringModel = res.getPattern().toString();
-//        StringBuilder stringModelBuilder = new StringBuilder(stringModel);
-//
-//        stringModelBuilder.insert(stringModelBuilder.lastIndexOf("\n"),".");
-//
-//        stringModel = stringModelBuilder.toString();
 
         Model provModel = ModelFactory.createDefaultModel();
         provModel.setNsPrefixes(model.getNsPrefixMap());
@@ -298,10 +271,6 @@ public class ProvenanceGenerator {
             provModel.add(stmt);
         }
         return provModel;
- //       provModel.read(new ByteArrayInputStream(stringModel.getBytes()), "TURTLE");
-        //provModel.read(is,"TURTLE");
-
-//        return RDF.loadModel(stringModel,"ttl");
 
     }
 
@@ -319,21 +288,6 @@ public class ProvenanceGenerator {
     }
     public static Query CreatAskQuery(Query query,QuerySolution binding){
 
-//
-//
-//        ParameterizedSparqlString pss = new ParameterizedSparqlString();
-//        pss.setCommandText(query.toString());
-//
-//        String varName = binding.varNames().next();
-//
-////
-////        if(binding.get(varName).isLiteral()){
-////            pss.setLiteral(varName,binding.getLiteral(varName));
-////        }else{
-////            pss.setIri(varName,binding.getResource(varName).toString());
-////        }
-//
-//        Query tmp = QueryFactory.create(pss.toString());
 
         Query askQuery = QueryFactory.create("ASK {<s> <p> <o>}");
 
@@ -342,6 +296,29 @@ public class ProvenanceGenerator {
 
 
         return askQuery;
+    }
+//    private static Query replaceWithVar(Query q){
+//        for()
+//    }
+    public static Pair<Model,Node> CreateDiffModel(Query q1, Query q2, Model model) throws Exception {
+
+        Op ominus = OpMinus.create((Op)Algebra.compile(q1),(Op)Algebra.compile(q2));
+
+        QueryIterator qIter = Algebra.exec(ominus,model);
+        Binding binding=null;
+        Node node = null;
+        for ( ; qIter.hasNext() ; )
+        {
+            binding = qIter.nextBinding() ;
+            node  = binding.get(q1.getProjectVars().get(0));
+        }
+        qIter.close() ;
+        if(binding == null)
+            return null;
+
+        Query q = CreateProvenanceQuery(binding,q1);
+
+        return new Pair<Model,Node>(ExecuteProvenanceQuery(q,model),node);
     }
 
 }

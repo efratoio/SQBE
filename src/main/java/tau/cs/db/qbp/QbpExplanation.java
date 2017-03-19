@@ -24,7 +24,6 @@ public class QbpExplanation implements QbpBasicExplanation{
     BasicPattern explanation;
     Node example;
     Model model;
-    ExprList exprList;
 
     @Override
     public String toString() {
@@ -82,30 +81,9 @@ public class QbpExplanation implements QbpBasicExplanation{
 
         }
 
-        initializeExprList();
 
     }
 
-    private void initializeExprList(){
-        this.exprList = new ExprList();
-        Set<Node> resources = new HashSet<>();
-        for(Triple t:this.explanation){
-            if(!t.getSubject().isLiteral() && !t.getSubject().isBlank()){
-                resources.add(t.getSubject());
-            }
-            if(!t.getObject().isLiteral() && !t.getObject().isBlank()){
-                resources.add(t.getObject());
-            }
-        }
-        List<Node> nodes= new ArrayList<>();
-        nodes.addAll(resources);
-        for(int i = 0 ; i<nodes.size(); i++){
-            for(int j= i+1 ; j<nodes.size(); j++){
-                    this.exprList.add(new E_NotEquals(new NodeValueNode(nodes.get(i)),new NodeValueNode(nodes.get(j))));
-            }
-        }
-
-    }
     public QbpExplanation(BasicPattern explanation, Node example) {
 
         this.example = example;
@@ -132,26 +110,10 @@ public class QbpExplanation implements QbpBasicExplanation{
                 }
             }
         }
-        initializeExprList();
+
 
     }
 
-
-
-
-
-
-    @Override
-    public QbpBasicPattern merge(Filterable t) {
-        TripleMerger tm = new TripleMerger(this,t);
-        Filterable patt = tm.merge();
-        if(patt == null){
-            return  null;
-        }
-        else{
-            return new QbpPattern(patt);
-        }
-    }
 
     @Override
     public List<TriplePath> getPattern() {
@@ -159,7 +121,14 @@ public class QbpExplanation implements QbpBasicExplanation{
     }
 
     @Override
-    public ExprList getExpList() {
-        return this.exprList;
+    public QbpBasicPattern merge(Patternable t) {
+        TripleMerger tm = new TripleMerger(this,t);
+        Patternable patt = tm.merge();
+        if(patt == null){
+            return  null;
+        }
+        else{
+            return new QbpPattern(patt.getPattern());
+        }
     }
 }

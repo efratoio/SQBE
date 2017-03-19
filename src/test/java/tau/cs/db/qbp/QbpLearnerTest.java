@@ -21,15 +21,15 @@ public class QbpLearnerTest {
         explanationListQ1 = Experiment.LoadExplanations("sp2b","q1","http://A");
     }
 
-    @Test
-    public void learnQuery() throws Exception {
-
-        List<Query> queryList = QbpLearner.LearnQuery(explanationListQ1,4);
-    }
-
-    @Test
-    public void learnQuery2() throws Exception {
-        List<QbpExplanation> explanationList = Experiment.LoadExplanations("sp2b","q2","http://A");
-        List<Query> queryList = QbpLearner.LearnQuery(explanationList,4);
-    }
+//    @Test
+//    public void learnQuery() throws Exception {
+//
+//        List<Query> queryList = QbpLearner.LearnQuery(explanationListQ1,4);
+//    }
+//
+//    @Test
+//    public void learnQuery2() throws Exception {
+//        List<QbpExplanation> explanationList = Experiment.LoadExplanations("sp2b","q2","http://A");
+//        List<Query> queryList = QbpLearner.LearnQuery(explanationList,4);
+//    }
 }

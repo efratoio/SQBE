@@ -2,9 +2,13 @@ package tau.cs.db.qbp;
 
 import org.apache.commons.math3.analysis.function.Exp;
 import org.apache.jena.atlas.lib.Pair;
+import org.apache.jena.datatypes.RDFDatatype;
+import org.apache.jena.datatypes.xsd.XSDDatatype;
+import org.apache.jena.datatypes.xsd.impl.XSDBaseNumericType;
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Node_Variable;
 import org.apache.jena.graph.Triple;
+import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Statement;
@@ -17,14 +21,17 @@ import org.apache.jena.sparql.algebra.op.OpSequence;
 import org.apache.jena.sparql.core.BasicPattern;
 import org.apache.jena.sparql.core.PathBlock;
 import org.apache.jena.sparql.core.TriplePath;
-import org.apache.jena.sparql.expr.E_NotEquals;
-import org.apache.jena.sparql.expr.Expr;
-import org.apache.jena.sparql.expr.ExprList;
+import org.apache.jena.sparql.core.Var;
+import org.apache.jena.sparql.engine.binding.Binding;
+import org.apache.jena.sparql.expr.*;
+import org.apache.jena.sparql.expr.nodevalue.NodeValueInteger;
 import org.apache.jena.sparql.path.P_Link;
 import org.apache.jena.sparql.path.P_OneOrMore1;
 import org.apache.jena.sparql.path.Path;
 import org.apache.jena.sparql.path.PathFactory;
 import org.apache.jena.sparql.syntax.ElementPathBlock;
+import org.apache.jena.vocabulary.XSD;
+
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.UndirectedGraph;
@@ -34,6 +41,8 @@ import org.jgrapht.alg.KShortestPaths;
 import org.jgrapht.graph.*;
 import org.jgrapht.traverse.TopologicalOrderIterator;
 
+
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -41,8 +50,28 @@ import java.util.*;
  */
 public class utils {
 
+    public static void fillClassMap(Map<Node,Node> classMap, Model model){
+        for (Node n : classMap.keySet()  ) {
+            Query classQuery = QueryFactory.create("SELECT ?class WHERE {?a a ?class}");
 
-    public static int varsCount(Filterable pattern){
+            classQuery.setQuerySelectType();
+
+            QuerySolutionMap initialBinding = new QuerySolutionMap();
+            initialBinding.add("a", model.getRDFNode(n));
+            QueryExecution qexec = QueryExecutionFactory.create(classQuery, model,initialBinding);
+
+            ResultSet rs = qexec.execSelect();
+            if(rs.hasNext()){
+                Binding bind = rs.nextBinding();
+                classMap.put(n,bind.get(Var.alloc("class")));
+            }
+
+
+        }
+
+    }
+
+    public static int varsCount(Patternable pattern){
         int varsNum = 0;
 
         for(TriplePath triple : pattern.getPattern()){
@@ -60,7 +89,36 @@ public class utils {
 
     }
 
+    /***
+     * The list must be all literals, and all same datatype
+     * @param ln
+     * @return
+     */
+    public static ExprList getRangeExpr(Var v, List<Node> ln) {
+        RDFDatatype rdt = ln.get(0).getLiteralDatatype();
+        ExprList elst = new ExprList();
 
+        if (rdt.getJavaClass().equals(java.math.BigInteger.class)) {
+            Integer min = (Integer) ln.get(0).getLiteral().getValue();
+            Integer max = (Integer) ln.get(0).getLiteral().getValue();
+
+            for (Node n : ln) {
+                Integer num = (Integer) n.getLiteral().getValue();
+                if (num < min)
+                    min = num;
+                if (max < num)
+                    max = num;
+
+            }
+            elst.add(new E_LessThanOrEqual(new ExprVar(v),
+                    new NodeValueInteger(new BigInteger(max.toString()))));
+            elst.add(new E_GreaterThanOrEqual(new ExprVar(v),
+                    new NodeValueInteger(new BigInteger(min.toString()))));
+        }
+//        if(rdt instanceof XSDBaseNumericType){
+
+        return elst;
+    }
     public static <T> List<List<T>> permute(List<T> arr, int k, List<List<T>> res){
         if(res == null){
             res = new ArrayList<List<T>>();
@@ -250,6 +308,7 @@ public class utils {
 
 
 
+
     public static boolean TestConnectivityWithPath(Set<TriplePath> value) {
         DirectedGraph<String,DefaultEdge> graph = makeDirectedGraph(value, true);
         if(!testConnectivityAndNoCycles(graph)){
@@ -295,7 +354,7 @@ public class utils {
      * @param pattern
      * @return
      */
-    public static boolean testBasicPatten(Filterable pattern){
+    public static boolean testBasicPatten(Patternable pattern){
         boolean flag = false;
         UndirectedGraph<String,DefaultEdge> graph = new Pseudograph<String, DefaultEdge>(DefaultEdge.class);
         for (TriplePath triple : pattern.getPattern()){
@@ -498,8 +557,15 @@ public class utils {
         return op ;
     }
 
+    public static Triple varAllocTriple(Triple t){
+        return new Triple(
+                t.getSubject().isVariable()?Var.alloc(t.getSubject().getName()):t.getSubject(),
+                t.getPredicate(),
+                t.getObject().isVariable()?Var.alloc(t.getObject().getName()):t.getObject());
+
+    }
     /** Convert any paths of exactly one predicate to a triple pattern */
-    public static Op queryBuilder(Filterable filt)
+    public static Op queryBuilder(Filterable filt, Model model)
     {
         BasicPattern bp = null ;
         Op op = null ;
@@ -510,7 +576,7 @@ public class utils {
             {
                 if ( bp == null )
                     bp = new BasicPattern() ;
-                bp.add(tp.asTriple()) ;
+                bp.add(varAllocTriple(tp.asTriple())) ;
                 continue ;
             }
             // Path form.
@@ -523,16 +589,9 @@ public class utils {
         }
         // End.  Finish off any outstanding BGP.
         op = flush(bp, op) ;
-        if(filt.getExpList().size()>0){
-            ExprList exprList  = new ExprList();
-            for(Expr expr : filt.getExpList()){
-                if((expr instanceof E_NotEquals) &&
-                        (((E_NotEquals) expr).getArg1().toString().startsWith("?")) &&
-                        (((E_NotEquals) expr).getArg2().toString().startsWith("?")))
-                    exprList.add(expr);
-            }
-            op = OpFilter.filter(exprList,op);
-        }
+        ExprList elst = filt.getExpList(model);
+        op = OpFilter.filter(elst,op);
+
         return op ;
     }
 /*

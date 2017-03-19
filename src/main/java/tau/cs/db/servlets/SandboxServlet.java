@@ -35,7 +35,7 @@ public class SandboxServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		QBPHandler qbpHandler = (QBPHandler) this.getServletContext().getAttribute("qbpHandler");
+		QBPHandler qbpHandler = (QBPHandler) request.getSession().getAttribute("qbpHandler");
 		List<Pair<String,Integer>> results=qbpHandler.FindNodes("");
 
 		JSONArray nodes = new JSONArray();
